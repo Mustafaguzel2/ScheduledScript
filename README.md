@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Proje Adı
 
-## Getting Started
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
 
-First, run the development server:
+## İçindekiler
+
+- [Proje Hakkında](#proje-hakkında)
+- [Başlarken](#başlarken)
+  - [Gereksinimler](#gereksinimler)
+  - [Kurulum](#kurulum)
+- [Kullanım](#kullanım)
+- [Katkıda Bulunma](#katkıda-bulunma)
+- [Lisans](#lisans)
+- [İletişim](#iletişim)
+- [Teşekkür](#teşekkür)
+
+## Proje Hakkında
+
+Bu proje, [Next.js](https://nextjs.org) kullanılarak oluşturulmuş bir web uygulamasıdır. Proje, modern web geliştirme tekniklerini kullanarak hızlı ve optimize edilmiş bir kullanıcı deneyimi sunmayı amaçlamaktadır.
+
+## Başlarken
+
+Bu bölüm, projenizi yerel ortamda nasıl kuracağınızı açıklar. Yerel bir kopya oluşturmak için aşağıdaki adımları izleyin.
+
+### Gereksinimler
+
+- Node.js
+- npm veya yarn
+
+### Kurulum
+
+1. Depoyu klonlayın
+   ```bash
+   git clone https://github.com/your_username/repo_name.git
+   ```
+2. NPM paketlerini yükleyin
+   ```bash
+   npm install
+   ```
+
+## Kullanım
+
+Geliştirme sunucusunu çalıştırmak için:
 
 ```bash
 npm run dev
-# or
+# veya
 yarn dev
-# or
+# veya
 pnpm dev
-# or
+# veya
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tarayıcınızda [http://localhost:3000](http://localhost:3000) adresini açarak sonucu görebilirsiniz.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`app/page.tsx` dosyasını düzenleyerek sayfayı düzenlemeye başlayabilirsiniz. Dosyayı düzenledikçe sayfa otomatik olarak güncellenir.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Katkıda Bulunma
 
-## Learn More
+Katkılar, açık kaynak topluluğunu öğrenmek, ilham almak ve yaratmak için harika bir yer haline getirir. Yaptığınız katkılar **büyük ölçüde takdir edilmektedir**.
 
-To learn more about Next.js, take a look at the following resources:
+1. Projeyi çatallayın
+2. Özellik Dalınızı Oluşturun (`git checkout -b feature/AmazingFeature`)
+3. Değişikliklerinizi İşleyin (`git commit -m 'Add some AmazingFeature'`)
+4. Dala İtin (`git push origin feature/AmazingFeature`)
+5. Bir Çekme İsteği Açın
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Lisans
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+MIT Lisansı altında dağıtılmaktadır. Daha fazla bilgi için `LICENSE` dosyasına bakın.
 
-## Deploy on Vercel
+## İletişim
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Adınız - [@your_twitter](https://twitter.com/your_twitter) - email@example.com
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Proje Bağlantısı: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+
+## Teşekkür
+
+- Kodunu kullandığınız kişilere teşekkür edin
+- İlham
+- vb.
