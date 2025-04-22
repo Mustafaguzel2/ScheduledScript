@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import UserTable from "@/components/user-table";
+import UserTable from "@/components/userTable";
 
 export const metadata: Metadata = {
   title: "Settings",

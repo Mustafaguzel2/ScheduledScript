@@ -9,15 +9,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { User } from "@/types/user";
 
-export type User = {
-  cn: string;
-  sAMAccountName: string;
-  groups: string[];
-  userAccountControl: string;
-};
-
-export const columns = (isAdmin: boolean): ColumnDef<User>[] => [
+export const columns = (
+  isAdmin: boolean,
+  onEditUser: (user: User) => void
+): ColumnDef<User, unknown>[] => [
   {
     accessorKey: "cn",
     header: "Name",
@@ -25,6 +22,10 @@ export const columns = (isAdmin: boolean): ColumnDef<User>[] => [
   {
     accessorKey: "sAMAccountName",
     header: "Username",
+  },
+  {
+    accessorKey: "userPrincipalName",
+    header: "User Principal Name",
   },
   {
     accessorKey: "groups",
@@ -63,7 +64,11 @@ export const columns = (isAdmin: boolean): ColumnDef<User>[] => [
               Copy username
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => onEditUser(row.original)}
+              disabled={true}
+              /* TODO: Talk client */
+            >
               <Edit2 className="mr-2 h-4 w-4" /> Edit user
             </DropdownMenuItem>
             <DropdownMenuItem

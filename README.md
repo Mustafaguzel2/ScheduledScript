@@ -14,6 +14,9 @@
 - [Lisans](#lisans)
 - [İletişim](#iletişim)
 - [Teşekkür](#teşekkür)
+- [API Endpoints](#api-endpoints)
+- [Development](#development)
+- [Contributing](#contributing)
 
 ## Proje Hakkında
 
@@ -73,12 +76,72 @@ MIT Lisansı altında dağıtılmaktadır. Daha fazla bilgi için `LICENSE` dosy
 
 ## İletişim
 
-Adınız - [@your_twitter](https://twitter.com/your_twitter) - email@example.com
-
-Proje Bağlantısı: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+For questions or suggestions, please contact [your.email@example.com](mailto:your.email@example.com).
 
 ## Teşekkür
 
-- Kodunu kullandığınız kişilere teşekkür edin
-- İlham
-- vb.
+- Thanks to the teams behind [Next.js](https://nextjs.org), [Tailwind CSS](https://tailwindcss.com), and [LDAP](https://ldap.com) for their amazing tools and documentation.
+- Inspired by the need for robust integrations between legacy systems and modern web interfaces.
+
+## API Endpoints
+
+- **Login API** - `POST /api/auth/login`  
+  Request Body:  
+  ```json
+  {
+    "username": "user",
+    "password": "pass"
+  }
+  ```  
+  Response: Session cookie and authentication status.
+
+- **Get Users API** - `GET /api/users/get-users`  
+  Requires a valid session cookie. Returns a list of users in Active Directory.
+
+- **Edit User API** - `PATCH /api/users/edit-user`  
+  Request Body:
+  ```json
+  {
+    "userPrincipalName": "user@example.com",
+    "cn": "User Name",
+    "sAMAccountName": "username",
+    "groups": ["Group1", "Group2"]
+  }
+  ```  
+  Response: Success or failure message.
+
+- **Delete User API** - `DELETE /api/users/delete-user`  
+  Request Body:
+  ```json
+  {
+    "userId": "username"
+  }
+  ```  
+  Response: Confirmation message of user deletion.
+
+## Development
+
+- **Tailwind CSS**: Customize your styling in `tailwind.config.ts` and `src/app/globals.css`.
+- **TypeScript & ESLint**: Enforced for type safety and code quality.
+- **Hot Reloading**: Changes in `src/app` will reflect immediately during development.
+
+## Contributing
+
+Contributions are welcome! Follow these steps to contribute:
+
+1. Fork the repository.
+2. Create a new branch:  
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+3. Commit your changes:  
+   ```bash
+   git commit -m "Add feature description"
+   ```
+4. Push to your branch:  
+   ```bash
+   git push origin feature/YourFeature
+   ```
+5. Open a Pull Request detailing your changes.
+
+Please follow the project's code style and commit guidelines.
