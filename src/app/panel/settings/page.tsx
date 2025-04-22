@@ -10,5 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function Settings() {
-  return <UserTable />;
+  return (
+    <div className="w-full h-full mx-auto">
+      <UserTable />
+    </div>
+  );
 }

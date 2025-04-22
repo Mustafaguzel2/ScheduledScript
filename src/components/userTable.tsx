@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { DataTable } from "./dataTable";
 import { columns } from "./columns";
-import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import {
   AlertDialog,
@@ -18,7 +17,7 @@ import {
 import { User } from "@/types/user";
 import { Button } from "@/components/ui/button";
 import { EditUserDialog } from "@/components/editUserDialog";
-
+import LoadingAnimation from "@/components/loadingAnimation";
 export default function UserTable() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
@@ -184,9 +183,7 @@ export default function UserTable() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center mx-auto">
-        <Loader2 className="animate-spin h-8 w-8" />
-      </div>
+      <LoadingAnimation />
     );
   }
 

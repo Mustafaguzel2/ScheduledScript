@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { ToastProvider } from "@/components/ui/toast";
-import Sidebar from "@/components/sidebar";
-import { Toaster } from "@/components/ui/toaster";
+import PanelLayoutWrapper from "@/components/panel-layout-wrapper";
 
 export const metadata: Metadata = {
   title: {
@@ -16,16 +14,8 @@ export const metadata: Metadata = {
 
 export default function PanelLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  return (
-    <div className="flex bg-background">
-      <Sidebar />
-      <ToastProvider>
-        <div className="flex w-screen min-h-screen p-10 pl-20 break-words">{children}</div>
-        <Toaster />
-      </ToastProvider>
-    </div>
-  );
+}) {
+  return <PanelLayoutWrapper>{children}</PanelLayoutWrapper>;
 }

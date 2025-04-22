@@ -3,9 +3,9 @@ import Link from "next/link";
 import {
   Settings2Icon,
   FileSlidersIcon,
-  HomeIcon,
   ChartNoAxesCombinedIcon,
 } from "lucide-react";
+
 interface SidebarElements {
   className?: string;
   isCollapsed?: boolean;
@@ -17,59 +17,44 @@ export default function SidebarElements({
 }: SidebarElements) {
   return (
     <div
-      className={`flex items-center justify-start flex-col space-y-2 text-secondary ${
-        className || ""
-      }`}
+      className={`flex flex-col space-y-2 text-secondary-foreground ${className || ""}`}
     >
       <Button
         variant="ghost"
-        className="flex items-center gap-3"
-        title="Home"
-        asChild
-      >
-        <Link href="/panel">
-          <HomeIcon className="w-12 h-12" />
-          {!isCollapsed && (
-            <span className="text-lg  md:inline md:text-xl">Home</span>
-          )}
-        </Link>
-      </Button>
-      <Button
-        variant="ghost"
-        className="flex items-center gap-3"
+        className={`flex items-center text-secondary-foreground hover:text-secondary-foreground/80 hover:bg-secondary/10 ${isCollapsed ? 'justify-center p-2' : 'gap-3'}`}
         title="Dashboard"
         asChild
       >
-        <Link href="/panel/dashboard">
-          <ChartNoAxesCombinedIcon className="w-12 h-12" />
+        <Link href="/panel">
+          <ChartNoAxesCombinedIcon className={`${isCollapsed ? 'w-8 h-8' : 'w-6 h-6'}`} />
           {!isCollapsed && (
-            <span className="text-lg  md:inline md:text-xl">Dashboard</span>
+            <span className="text-lg md:text-xl">Dashboard</span>
           )}
         </Link>
       </Button>
       <Button
         variant="ghost"
-        className="flex items-center gap-3"
+        className={`flex items-center text-secondary-foreground hover:text-secondary-foreground/80 hover:bg-secondary/10 ${isCollapsed ? 'justify-center p-2' : 'gap-3'}`}
         title="Configurator"
         asChild
       >
         <Link href="/panel/configurator">
-          <FileSlidersIcon className="w-12 h-12" />
+          <FileSlidersIcon className={`${isCollapsed ? 'w-8 h-8' : 'w-6 h-6'}`} />
           {!isCollapsed && (
-            <span className="text-lg md:inline md:text-xl">Configurator</span>
+            <span className="text-lg md:text-xl">Configurator</span>
           )}
         </Link>
       </Button>
       <Button
         variant="ghost"
-        className="flex items-center gap-3"
+        className={`flex items-center text-secondary-foreground hover:text-secondary-foreground/80 hover:bg-secondary/10 ${isCollapsed ? 'justify-center p-2' : 'gap-3'}`}
         title="Settings"
         asChild
       >
         <Link href="/panel/settings">
-          <Settings2Icon className="w-12 h-12" />
+          <Settings2Icon className={`${isCollapsed ? 'w-8 h-8' : 'w-6 h-6'}`} />
           {!isCollapsed && (
-            <span className="text-lg md:inline md:text-xl">Settings</span>
+            <span className="text-lg md:text-xl">Settings</span>
           )}
         </Link>
       </Button>
