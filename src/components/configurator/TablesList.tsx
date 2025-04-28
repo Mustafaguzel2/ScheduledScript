@@ -1,8 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { TableInfo } from "@/app/api/utils/db";
 
 interface Table {
   id: string;
@@ -17,12 +24,46 @@ interface TablesListProps {
 export function TablesList({ tables }: TablesListProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearch = useDebounce(searchQuery, 50);
+  const [tableDetails, setTableDetails] = useState<TableInfo[]>([]);
 
   const filteredTables = tables.filter((table) =>
     `${table.schema}.${table.name}`
       .toLowerCase()
       .includes(debouncedSearch.toLowerCase())
   );
+
+  useEffect(() => {
+    console.log('filteredTables:', filteredTables);
+  }, [filteredTables]);
+
+  useEffect(() => {
+    console.log('tableDetails:', tableDetails);
+  }, [tableDetails]);
+
+  useEffect(() => {
+    const fetchTableDetails = async () => {
+      try {
+        const response = await fetch('/api/tables/details');
+        if (!response.ok) {
+          throw new Error('Failed to fetch table details');
+        }
+        const data = await response.json();
+        setTableDetails(data);
+      } catch (error) {
+        console.error('Error fetching table details:', error);
+      }
+    };
+
+    fetchTableDetails();
+  }, []);
+
+  const getTableColumns = (schema: string, name: string) => {
+    const found = tableDetails.find(
+      (table) => table.schema === schema && table.table === name
+    );
+    console.log('getTableColumns', { schema, name, found });
+    return found?.columns || [];
+  };
 
   return (
     <Card className="w-full">
@@ -47,15 +88,39 @@ export function TablesList({ tables }: TablesListProps) {
       </CardHeader>
       <CardContent>
         <div className="space-y-1 max-h-[calc(100vh-280px)] min-h-[400px] overflow-y-auto pr-2">
-          {filteredTables.map((table) => (
-            <div
-              key={table.id}
-              className="px-4 py-2 rounded-md text-sm hover:bg-muted/50"
-            >
-              <div className="font-medium">{table.name}</div>
-              <div className="text-xs text-muted-foreground">{table.schema}</div>
-            </div>
-          ))}
+          {filteredTables.map((table) => {
+            const columns = getTableColumns(table.schema, table.name);
+            
+            return (
+              <TooltipProvider key={table.id}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="px-4 py-2 rounded-md text-sm hover:bg-muted/50 cursor-pointer">
+                      <div className="font-medium">{table.name}</div>
+                      <div className="text-xs text-muted-foreground">{table.schema}</div>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-[300px] p-2 bg-popover text-popover-foreground border border-border shadow-lg">
+                    <div className="space-y-1">
+                      <div className="font-medium mb-1">Columns:</div>
+                      {columns.length > 0 ? (
+                        <div className="space-y-1">
+                          {columns.map((column) => (
+                            <div key={column.column_name} className="text-xs">
+                              <span className="font-medium">{column.column_name}</span>
+                              <span className="text-muted-foreground ml-2">({column.data_type})</span>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="text-xs text-muted-foreground">Loading columns...</div>
+                      )}
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            );
+          })}
           {filteredTables.length === 0 && (
             <div className="text-center py-4 text-sm text-muted-foreground">
               No tables found
