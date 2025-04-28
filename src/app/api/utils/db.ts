@@ -8,33 +8,67 @@ const pool = new Pool({
   password: process.env.DB_PASSWORD,
 });
 
-interface TableColumn {
+export interface TableColumn {
   column_name: string;
   data_type: string;
   is_nullable: string;
 }
 
-interface TableInfo {
+export interface TableInfo {
   schema: string;
   table: string;
+  type: string;
   columns: TableColumn[];
   data: Record<string, string | number | boolean | null>[];
 }
 
+interface TableListItem {
+  id: string;
+  name: string;
+  schema: string;
+  type: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export async function getTableList(): Promise<TableListItem[]> {
+  try {
+    const query = `
+      SELECT 
+        CONCAT(table_schema, '.', table_name) as id,
+        table_name as name,
+        table_schema as schema,
+        table_type as type,
+        NOW() as created_at,
+        NOW() as updated_at
+      FROM information_schema.tables 
+      WHERE table_schema NOT IN ('information_schema', 'pg_catalog')
+      AND table_type IN ('BASE TABLE', 'VIEW')
+      ORDER BY table_schema, table_name;
+    `;
+
+    const result = await pool.query(query);
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching table list:", error);
+    throw error;
+  }
+}
+
 export async function getTableDetails(): Promise<TableInfo[]> {
   try {
-    // Get all tables
+    // Get all tables and views
     const tablesQuery = `
-      SELECT table_schema, table_name
+      SELECT table_schema, table_name, table_type
       FROM information_schema.tables 
       WHERE table_schema = 'deneme'
-      AND table_type = 'BASE TABLE'
+      AND table_type IN ('BASE TABLE', 'VIEW')
       ORDER BY table_schema, table_name;
     `;
 
     const tables = await pool.query(tablesQuery);
 
-    // Get details for each table
+    // Get details for each table/view
     const tableDetails = await Promise.all(
       tables.rows.map(async (table) => {
         // Get columns
@@ -53,13 +87,14 @@ export async function getTableDetails(): Promise<TableInfo[]> {
         const dataQuery = `
           SELECT *
           FROM "${table.table_schema}"."${table.table_name}"
-          LIMIT 100;
+          ;
         `;
         const data = await pool.query(dataQuery);
 
         return {
           schema: table.table_schema,
           table: table.table_name,
+          type: table.table_type,
           columns: columns.rows,
           data: data.rows,
         };

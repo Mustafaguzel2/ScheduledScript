@@ -4,4 +4,5 @@ export type User = {
   sAMAccountName: string;
   groups: string[];
   userAccountControl: string;
+  dn: string;
 };

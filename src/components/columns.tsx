@@ -1,5 +1,6 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal, Trash2, Edit2 } from "lucide-react";
+import React from "react";
+import { ColumnDef, Row } from "@tanstack/react-table";
+import { MoreHorizontal, Trash2, ToggleLeft, ToggleRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,11 +11,71 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { User } from "@/types/user";
+import { useToast } from "@/hooks/use-toast";
 
-export const columns = (
-  isAdmin: boolean,
-  onEditUser: (user: User) => void
-): ColumnDef<User, unknown>[] => [
+interface StatusCellProps {
+  row: Row<User>;
+  isAdmin: boolean;
+}
+
+const StatusCell: React.FC<StatusCellProps> = ({ row, isAdmin }) => {
+  const { toast } = useToast();
+  const status = parseInt(row.getValue("userAccountControl") as string);
+  const isDisabled = status & 2;
+
+  const handleStatusChange = async () => {
+    try {
+      const response = await fetch("/api/users/change-status", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userDn: row.original.dn,
+          enabled: isDisabled,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to change account status");
+      }
+
+      toast({
+        title: "Success",
+        description: `Account ${
+          isDisabled ? "enabled" : "disabled"
+        } successfully.`,
+      });
+
+      // Refresh the page to update the status
+      window.location.reload();
+    } catch {
+      toast({
+        title: "Error",
+        description: "Failed to change account status",
+        variant: "destructive",
+      });
+    }
+  };
+
+  return (
+    <Button
+      variant="ghost"
+      size="sm"
+      onClick={handleStatusChange}
+      disabled={!isAdmin}
+    >
+      {isDisabled ? (
+        <ToggleLeft className="h-4 w-4 text-red-500" />
+      ) : (
+        <ToggleRight className="h-4 w-4 text-green-500" />
+      )}
+      <span className="ml-2">{isDisabled ? "Disabled" : "Enabled"}</span>
+    </Button>
+  );
+};
+
+export const columns = (isAdmin: boolean): ColumnDef<User, unknown>[] => [
   {
     accessorKey: "cn",
     header: "Name",
@@ -38,10 +99,7 @@ export const columns = (
   {
     accessorKey: "userAccountControl",
     header: "Account Status",
-    cell: ({ row }) => {
-      const status = parseInt(row.getValue("userAccountControl") as string);
-      return status & 2 ? "Disabled" : "Enabled";
-    },
+    cell: ({ row }) => <StatusCell row={row} isAdmin={isAdmin} />,
   },
   {
     id: "actions",
@@ -64,13 +122,6 @@ export const columns = (
               Copy username
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => onEditUser(row.original)}
-              disabled={true}
-              /* TODO: Talk client */
-            >
-              <Edit2 className="mr-2 h-4 w-4" /> Edit user
-            </DropdownMenuItem>
             <DropdownMenuItem
               className="text-red-600"
               onClick={() =>

@@ -24,19 +24,16 @@ import { Label } from "@/components/ui/label";
 import { MoveRight, MoveLeft } from "lucide-react";
 import { User } from "@/types/user";
 import { SortingState } from "@tanstack/react-table";
-import { UserPlusIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  isAdmin: boolean;
 }
 
 export function DataTable<TData extends User, TValue>({
   columns,
   data,
-  isAdmin,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -97,13 +94,6 @@ export function DataTable<TData extends User, TValue>({
               <Label htmlFor="group">Search by group</Label>
             </div>
           </RadioGroup>
-          <Button
-            variant="outline"
-            className="flex items-center w-36"
-            disabled={!isAdmin || true}
-          >
-            <UserPlusIcon className="mr-2 h-4 w-4" /> Add User
-          </Button>
         </div>
       </CardHeader>
       <CardContent className="pt-6">

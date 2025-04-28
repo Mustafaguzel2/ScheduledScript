@@ -205,7 +205,6 @@ export default function UserTable() {
       <DataTable
         columns={columns(isAdmin, handleEditUser)}
         data={users}
-        isAdmin={isAdmin}
       />
       <EditUserDialog
         isOpen={isEditDialogOpen}

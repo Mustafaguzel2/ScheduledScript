@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import ConfiguratorPage from "@/components/configurator/ConfigurationPage";
 
 export const metadata: Metadata = {
   title: "Configurator",
@@ -9,5 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function Configurator() {
-  return <div>Configurator</div>;
+  return (
+    <div>
+      <ConfiguratorPage />
+    </div>
+  );
 }
