@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { User } from "@/types/user";
 import { Button } from "@/components/ui/button";
-import { EditUserDialog } from "@/components/editUserDialog";
 import LoadingAnimation from "@/components/loadingAnimation";
 export default function UserTable() {
   const [users, setUsers] = useState<User[]>([]);
@@ -26,8 +25,7 @@ export default function UserTable() {
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [userToEdit, setUserToEdit] = useState<User | null>(null);
+
   const { toast } = useToast();
 
   useEffect(() => {
@@ -74,60 +72,6 @@ export default function UserTable() {
 
     fetchUsers();
   }, []);
-
-  const handleEditUser = (user: User) => {
-    setUserToEdit(user);
-    setIsEditDialogOpen(true);
-  };
-
-  const handleEditSubmit = async (userData: {
-    cn: string;
-    sAMAccountName: string;
-    groups: string[];
-    userPrincipalName: string;
-  }) => {
-    try {
-      const response = await fetch("/api/users/edit-user", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify({
-          ...userData,
-          userPrincipalName: userToEdit?.userPrincipalName || "",
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        toast({
-          title: "Failed to edit user",
-          description: errorData.message,
-          variant: "destructive",
-        });
-        return;
-      }
-
-      toast({
-        title: "User edited successfully",
-      });
-      setUsers((prevUsers) =>
-        prevUsers.map((u) =>
-          u.sAMAccountName === userData.sAMAccountName
-            ? { ...u, ...userData }
-            : u
-        )
-      );
-    } catch (error) {
-      console.error("Error editing user:", error);
-      toast({
-        title: "Error editing user",
-        description: "An unexpected error occurred. Please try again.",
-        variant: "destructive",
-      });
-    }
-  };
 
   useEffect(() => {
     const handleDeleteUser = (event: CustomEvent<User>) => {
@@ -182,9 +126,7 @@ export default function UserTable() {
   };
 
   if (loading) {
-    return (
-      <LoadingAnimation />
-    );
+    return <LoadingAnimation />;
   }
 
   if (error) {
@@ -202,16 +144,7 @@ export default function UserTable() {
 
   return (
     <div className="container mx-auto py-10">
-      <DataTable
-        columns={columns(isAdmin, handleEditUser)}
-        data={users}
-      />
-      <EditUserDialog
-        isOpen={isEditDialogOpen}
-        onClose={() => setIsEditDialogOpen(false)}
-        user={userToEdit}
-        onSubmit={handleEditSubmit}
-      />
+      <DataTable columns={columns(isAdmin)} data={users} />
       <AlertDialog
         open={isDeleteDialogOpen}
         onOpenChange={setIsDeleteDialogOpen}

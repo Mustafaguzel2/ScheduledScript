@@ -46,7 +46,7 @@ export async function PATCH(request: Request) {
     // Search for the user to get current userAccountControl
     const { searchEntries } = await client.search(userDn, {
       scope: "base",
-      attributes: ["userAccountControl"],
+      attributes: ["userAccountControl", "sAMAccountName", "objectClass"],
     });
     if (!searchEntries.length) {
       await client.unbind();
@@ -55,7 +55,27 @@ export async function PATCH(request: Request) {
         { status: 404 }
       );
     }
-    const user = searchEntries[0] as { userAccountControl?: string | string[] };
+    const user = searchEntries[0] as { 
+      userAccountControl?: string | string[],
+      sAMAccountName?: string | string[],
+      objectClass?: string | string[]
+    };
+    
+    // Check if this is a protected account
+    const samAccountName = Array.isArray(user.sAMAccountName) ? user.sAMAccountName[0] : user.sAMAccountName || "";
+    
+    // List of system accounts or special accounts that shouldn't be modified
+    const protectedAccounts = ["krbtgt", "administrator", "guest"];
+    
+    // Check if this is a system account that shouldn't be modified
+    if (protectedAccounts.includes(samAccountName.toLowerCase())) {
+      await client.unbind();
+      return NextResponse.json(
+        { message: `The account '${samAccountName}' is a protected system account and cannot be modified.` },
+        { status: 403 }
+      );
+    }
+    
     const currentUAC = parseInt(Array.isArray(user.userAccountControl) ? user.userAccountControl[0] : user.userAccountControl || "0");
 
     // 0x0002 is the ADS_UF_ACCOUNTDISABLE flag
@@ -82,8 +102,19 @@ export async function PATCH(request: Request) {
   } catch (error) {
     if (client) await client.unbind().catch(() => {});
     console.error("Error changing account status:", error);
+    
+    // Extract more detailed error information
+    let errorMessage = "Internal server error.";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+      // If the error contains AD-specific error codes, extract more meaningful information
+      if (errorMessage.includes("DSID") && errorMessage.includes("problem")) {
+        errorMessage = `Active Directory error: ${errorMessage}`;
+      }
+    }
+    
     return NextResponse.json(
-      { message: "Internal server error." },
+      { message: errorMessage },
       { status: 500 }
     );
   }
