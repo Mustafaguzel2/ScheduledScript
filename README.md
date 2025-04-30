@@ -1,98 +1,111 @@
-# Proje Adı
+# XOPS
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
 
-## İçindekiler
+## Contents
 
-- [Proje Hakkında](#proje-hakkında)
-- [Başlarken](#başlarken)
-  - [Gereksinimler](#gereksinimler)
-  - [Kurulum](#kurulum)
-- [Kullanım](#kullanım)
-- [Katkıda Bulunma](#katkıda-bulunma)
-- [Lisans](#lisans)
-- [İletişim](#iletişim)
-- [Teşekkür](#teşekkür)
+- [About](#about)
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
 - [API Endpoints](#api-endpoints)
 - [Development](#development)
 - [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Acknowledgments](#acknowledgments)
 
-## Proje Hakkında
+## About
 
-Bu proje, [Next.js](https://nextjs.org) kullanılarak oluşturulmuş bir web uygulamasıdır. Proje, modern web geliştirme tekniklerini kullanarak hızlı ve optimize edilmiş bir kullanıcı deneyimi sunmayı amaçlamaktadır.
+XOPS is a modern web application built with [Next.js](https://nextjs.org) and [Tailwind CSS](https://tailwindcss.com). It provides an intuitive admin panel for operations management with dashboard visualizations, configuration tools, and user management capabilities.
 
-## Başlarken
+## Features
 
-Bu bölüm, projenizi yerel ortamda nasıl kuracağınızı açıklar. Yerel bir kopya oluşturmak için aşağıdaki adımları izleyin.
+- **Modern Dashboard**: Real-time monitoring and visualization
+- **User Management**: Integration with Active Directory for user administration
+- **Configuration Panel**: System settings and configuration interface
+- **Responsive Design**: Works on desktop and mobile devices
+- **Dark/Light Mode**: Support for theme preferences
 
-### Gereksinimler
+## Getting Started
 
-- Node.js
-- npm veya yarn
+Follow these instructions to set up the project locally.
 
-### Kurulum
+### Prerequisites
 
-1. Depoyu klonlayın
+- Node.js (v18 or newer)
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+1. Clone the repository
+
    ```bash
-   git clone https://github.com/your_username/repo_name.git
+   git clone https://github.com/yourusername/xops.git
+   cd xops
    ```
-2. NPM paketlerini yükleyin
+
+2. Install dependencies
+
    ```bash
    npm install
+   # or
+   yarn install
    ```
 
-## Kullanım
+3. Create a `.env.local` file based on `.env.example` (if provided)
 
-Geliştirme sunucusunu çalıştırmak için:
+## Usage
+
+To run the development server:
 
 ```bash
 npm run dev
-# veya
+# or
 yarn dev
-# veya
+# or
 pnpm dev
-# veya
+# or
 bun dev
 ```
 
-Tarayıcınızda [http://localhost:3000](http://localhost:3000) adresini açarak sonucu görebilirsiniz.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-`app/page.tsx` dosyasını düzenleyerek sayfayı düzenlemeye başlayabilirsiniz. Dosyayı düzenledikçe sayfa otomatik olarak güncellenir.
+## Project Structure
 
-## Katkıda Bulunma
-
-Katkılar, açık kaynak topluluğunu öğrenmek, ilham almak ve yaratmak için harika bir yer haline getirir. Yaptığınız katkılar **büyük ölçüde takdir edilmektedir**.
-
-1. Projeyi çatallayın
-2. Özellik Dalınızı Oluşturun (`git checkout -b feature/AmazingFeature`)
-3. Değişikliklerinizi İşleyin (`git commit -m 'Add some AmazingFeature'`)
-4. Dala İtin (`git push origin feature/AmazingFeature`)
-5. Bir Çekme İsteği Açın
-
-## Lisans
-
-MIT Lisansı altında dağıtılmaktadır. Daha fazla bilgi için `LICENSE` dosyasına bakın.
-
-## İletişim
-
-For questions or suggestions, please contact [your.email@example.com](mailto:your.email@example.com).
-
-## Teşekkür
-
-- Thanks to the teams behind [Next.js](https://nextjs.org), [Tailwind CSS](https://tailwindcss.com), and [LDAP](https://ldap.com) for their amazing tools and documentation.
-- Inspired by the need for robust integrations between legacy systems and modern web interfaces.
+```text
+xops/
+├── public/        # Static assets
+├── src/
+│   ├── app/       # Next.js 13+ App Router
+│   │   ├── (login)/     # Authentication pages
+│   │   ├── api/         # API routes
+│   │   ├── panel/       # Admin panel pages
+│   │       ├── dashboard/
+│   │       ├── configurator/
+│   │       ├── settings/
+│   ├── components/      # React components
+│   ├── hooks/           # Custom React hooks
+│   ├── lib/             # Utility functions and libraries
+│   └── types/           # TypeScript type definitions
+```
 
 ## API Endpoints
 
 - **Login API** - `POST /api/auth/login`  
-  Request Body:  
+  Request Body:
+
   ```json
   {
     "username": "user",
     "password": "pass"
   }
-  ```  
+  ```
+
   Response: Session cookie and authentication status.
 
 - **Get Users API** - `GET /api/users/get-users`  
@@ -100,6 +113,7 @@ For questions or suggestions, please contact [your.email@example.com](mailto:you
 
 - **Edit User API** - `PATCH /api/users/edit-user`  
   Request Body:
+
   ```json
   {
     "userPrincipalName": "user@example.com",
@@ -107,41 +121,49 @@ For questions or suggestions, please contact [your.email@example.com](mailto:you
     "sAMAccountName": "username",
     "groups": ["Group1", "Group2"]
   }
-  ```  
+  ```
+
   Response: Success or failure message.
 
 - **Delete User API** - `DELETE /api/users/delete-user`  
   Request Body:
+
   ```json
   {
     "userId": "username"
   }
-  ```  
+  ```
+
   Response: Confirmation message of user deletion.
 
 ## Development
 
-- **Tailwind CSS**: Customize your styling in `tailwind.config.ts` and `src/app/globals.css`.
-- **TypeScript & ESLint**: Enforced for type safety and code quality.
-- **Hot Reloading**: Changes in `src/app` will reflect immediately during development.
+- **Tailwind CSS**: Customize styling in `tailwind.config.ts` and `src/app/globals.css`
+- **TypeScript & ESLint**: Enforced for type safety and code quality
+- **App Router**: Uses Next.js 13+ App Router for improved routing and layouts
+- **Hot Reloading**: Changes reflect immediately during development
 
 ## Contributing
 
-Contributions are welcome! Follow these steps to contribute:
+Contributions are welcome! Please follow these steps:
 
-1. Fork the repository.
-2. Create a new branch:  
-   ```bash
-   git checkout -b feature/YourFeature
-   ```
-3. Commit your changes:  
-   ```bash
-   git commit -m "Add feature description"
-   ```
-4. Push to your branch:  
-   ```bash
-   git push origin feature/YourFeature
-   ```
-5. Open a Pull Request detailing your changes.
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
 
-Please follow the project's code style and commit guidelines.
+Please adhere to the project's code style and commit message conventions.
+
+## License
+
+Distributed under the MIT License. See `LICENSE` file for more information.
+
+## Contact
+
+For questions or suggestions, please contact [your.email@example.com](mailto:your.email@example.com).
+
+## Acknowledgments
+
+- Thanks to the teams behind [Next.js](https://nextjs.org) and [Tailwind CSS](https://tailwindcss.com) for their excellent tools and documentation
+- Inspired by the need for modern, efficient operations management interfaces

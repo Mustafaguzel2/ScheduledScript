@@ -1,9 +1,9 @@
 import { Metadata } from "next";
-import UserTable from "@/components/settings/userTable";
+import DashboardPage from "@/components/dashboard/DashboardPage";
 
 export const metadata: Metadata = {
-  title: "Settings",
-  description: "Settings",
+  title: "Dashboard",
+  description: "Dashboard",
   icons: {
     icon: "/favicon.ico",
   },
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function Settings() {
   return (
     <div className="w-full h-full mx-auto">
-      <UserTable />
+      <DashboardPage />
     </div>
   );
 }

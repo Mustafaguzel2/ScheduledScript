@@ -66,7 +66,7 @@ export function TablesList({ tables }: TablesListProps) {
   };
 
   return (
-    <Card className="w-full">
+    <Card className="w-full h-full">
       <CardHeader className="space-y-4">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-medium">Tables</CardTitle>

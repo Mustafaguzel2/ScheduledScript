@@ -9,4 +9,4 @@ export interface TableInfo {
   table: string;
   columns: TableColumn[];
   data: Record<string, string | number | boolean | null>[];
-} 
+}

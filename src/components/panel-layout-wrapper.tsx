@@ -9,7 +9,9 @@ interface PanelLayoutWrapperProps {
   children: React.ReactNode;
 }
 
-export default function PanelLayoutWrapper({ children }: PanelLayoutWrapperProps) {
+export default function PanelLayoutWrapper({
+  children,
+}: PanelLayoutWrapperProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
@@ -21,10 +23,7 @@ export default function PanelLayoutWrapper({ children }: PanelLayoutWrapperProps
         }`}
       >
         <div className="fixed h-screen">
-          <Sidebar 
-            collapsed={isCollapsed} 
-            onCollapsedChange={setIsCollapsed}
-          />
+          <Sidebar collapsed={isCollapsed} onCollapsedChange={setIsCollapsed} />
         </div>
       </div>
 
@@ -32,7 +31,7 @@ export default function PanelLayoutWrapper({ children }: PanelLayoutWrapperProps
       <div className="flex-1 overflow-y-auto">
         <main className="h-full">
           <ToastProvider>
-            <div 
+            <div
               className={`flex min-h-screen p-6 transition-all duration-300 ease-in-out ${
                 isCollapsed ? "pl-8" : "pl-12"
               }`}
@@ -45,4 +44,4 @@ export default function PanelLayoutWrapper({ children }: PanelLayoutWrapperProps
       </div>
     </div>
   );
-} 
+}

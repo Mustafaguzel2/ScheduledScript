@@ -19,7 +19,11 @@ interface SidebarProps {
   className?: string;
 }
 
-export default function Sidebar({ collapsed, onCollapsedChange, className }: SidebarProps) {
+export default function Sidebar({
+  collapsed,
+  onCollapsedChange,
+  className,
+}: SidebarProps) {
   return (
     <div className={`h-full ${collapsed ? "w-24" : "w-64"}`}>
       <Card
