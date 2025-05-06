@@ -11,15 +11,15 @@ import {
 } from "@/components/ui/tooltip";
 import { TableInfo } from "@/app/api/utils/db";
 
-interface Table {
+type Table = {
   id: string;
   name: string;
   schema: string;
-}
+};
 
-interface TablesListProps {
+type TablesListProps = {
   tables: Table[];
-}
+};
 
 export function TablesList({ tables }: TablesListProps) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -31,14 +31,6 @@ export function TablesList({ tables }: TablesListProps) {
       .toLowerCase()
       .includes(debouncedSearch.toLowerCase())
   );
-
-  useEffect(() => {
-    console.log('filteredTables:', filteredTables);
-  }, [filteredTables]);
-
-  useEffect(() => {
-    console.log('tableDetails:', tableDetails);
-  }, [tableDetails]);
 
   useEffect(() => {
     const fetchTableDetails = async () => {
@@ -61,12 +53,11 @@ export function TablesList({ tables }: TablesListProps) {
     const found = tableDetails.find(
       (table) => table.schema === schema && table.table === name
     );
-    console.log('getTableColumns', { schema, name, found });
     return found?.columns || [];
   };
 
   return (
-    <Card className="w-full h-full">
+    <Card className="w-full h-full min-w-[200px]">
       <CardHeader className="space-y-4">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-medium">Tables</CardTitle>

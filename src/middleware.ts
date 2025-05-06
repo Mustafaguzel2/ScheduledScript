@@ -16,8 +16,8 @@ export function middleware(request: NextRequest) {
 
   // Eğer oturum varsa ve kullanıcı giriş sayfasındaysa yönlendir
   if (session && currentPath === "/") {
-    console.log("Session exists. Redirecting to panel.");
-    return NextResponse.redirect(new URL("/panel", request.url));
+    console.log("Session exists. Redirecting directly to dashboard.");
+    return NextResponse.redirect(new URL("/panel/dashboard", request.url));
   }
   return NextResponse.next();
 }

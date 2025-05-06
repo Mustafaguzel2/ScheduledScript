@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Toaster as SonnerToaster } from "sonner";
 import { ToastProvider } from "@/components/ui/toast";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -37,6 +38,7 @@ export default function RootLayout({
           </ThemeProvider>
         </ToastProvider>
         <Toaster />
+        <SonnerToaster position="top-right" closeButton richColors />
       </body>
     </html>
   );

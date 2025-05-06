@@ -1,0 +1,2 @@
+[2025-05-06T09:19:01.452Z] [INFO] Job created with cron pattern: 0 * * * *
+[2025-05-06T09:19:01.453Z] [INFO] This is a recurring job that will run according to the cron schedule

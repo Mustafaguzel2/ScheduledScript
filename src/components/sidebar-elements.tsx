@@ -5,6 +5,7 @@ import {
   FileSlidersIcon,
   ChartNoAxesCombinedIcon,
 } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 interface SidebarElements {
   className?: string;
@@ -15,6 +16,20 @@ export default function SidebarElements({
   className,
   isCollapsed,
 }: SidebarElements) {
+  const searchParams = useSearchParams();
+  
+  // Create a function to get the href with preserved query params
+  const getHrefWithParams = (path: string) => {
+    // Always preserve the tab parameter when navigating to configurator
+    if (path === '/panel/configurator') {
+      const tabParam = searchParams.get('tab');
+      if (tabParam) {
+        return `${path}?tab=${tabParam}`;
+      }
+    }
+    return path;
+  };
+
   return (
     <div
       className={`flex flex-col space-y-2 text-secondary-foreground ${
@@ -46,7 +61,7 @@ export default function SidebarElements({
         title="Configurator"
         asChild
       >
-        <Link href="/panel/configurator">
+        <Link href={getHrefWithParams('/panel/configurator')}>
           <FileSlidersIcon
             className={`${isCollapsed ? "w-8 h-8" : "w-6 h-6"}`}
           />

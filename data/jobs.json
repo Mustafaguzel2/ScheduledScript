@@ -1,0 +1,11 @@
+[
+  {
+    "id": "wu0do3s_1746523141450",
+    "cronPattern": "0 * * * *",
+    "scheduledFor": "2025-05-06T09:19:01.450Z",
+    "status": "scheduled",
+    "scriptPath": "/Users/mustafayigitguzel/Desktop/ProjectX/xops/src/app/api/start-job/example.py",
+    "createdAt": "2025-05-06T09:19:01.450Z",
+    "oneTimeExecution": false
+  }
+]

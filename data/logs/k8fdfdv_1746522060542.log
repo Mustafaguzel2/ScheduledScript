@@ -1,0 +1,78 @@
+[2025-05-06T09:06:00.017Z] [INFO] AUTOMATIC EXECUTION STARTED
+[2025-05-06T09:06:00.020Z] [INFO] Started execution at 06.05.2025 12:06:00 (Turkey time)
+[2025-05-06T09:06:00.020Z] [INFO] AUTOMATIC EXECUTION STARTED
+[2025-05-06T09:06:00.020Z] [INFO] Scheduled fire date: 06.05.2025 12:06:00 (Turkey time)
+[2025-05-06T09:06:00.020Z] [INFO] Started execution at 06.05.2025 12:06:00 (Turkey time)
+[2025-05-06T09:06:00.021Z] [INFO] Executing Python script: /Users/mustafayigitguzel/Desktop/ProjectX/xops/src/app/api/start-job/example.py
+[2025-05-06T09:06:00.021Z] [INFO] Scheduled fire date: 06.05.2025 12:06:00 (Turkey time)
+[2025-05-06T09:06:00.025Z] [INFO] Executing Python script: /Users/mustafayigitguzel/Desktop/ProjectX/xops/src/app/api/start-job/example.py
+[2025-05-06T09:06:00.229Z] [INFO] stdout: Python script executed at: 2025-05-06 12:06:00.213869
+Python version: 3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 08:22:19) [Clang 14.0.6 ]
+Current working directory: /Users/mustafayigitguzel/Desktop/ProjectX/xops
+Performing scheduled task...
+Task completed successfully! Result: 499999500000
+
+[2025-05-06T09:06:00.230Z] [SUCCESS] EXECUTION COMPLETED
+[2025-05-06T09:06:00.230Z] [SUCCESS] Completed at: 06.05.2025 12:06:00
+[2025-05-06T09:06:00.230Z] [SUCCESS] Execution time: 0.21 seconds
+[2025-05-06T09:06:00.288Z] [INFO] stdout: Python script executed at: 2025-05-06 12:06:00.272500
+Python version: 3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 08:22:19) [Clang 14.0.6 ]
+Current working directory: /Users/mustafayigitguzel/Desktop/ProjectX/xops
+Performing scheduled task...
+Task completed successfully! Result: 499999500000
+
+[2025-05-06T09:06:00.288Z] [SUCCESS] EXECUTION COMPLETED
+[2025-05-06T09:06:00.288Z] [SUCCESS] Completed at: 06.05.2025 12:06:00
+[2025-05-06T09:06:00.288Z] [SUCCESS] Execution time: 0.26 seconds
+[2025-05-06T09:07:00.015Z] [INFO] AUTOMATIC EXECUTION STARTED
+[2025-05-06T09:07:00.016Z] [INFO] AUTOMATIC EXECUTION STARTED
+[2025-05-06T09:07:00.017Z] [INFO] Started execution at 06.05.2025 12:07:00 (Turkey time)
+[2025-05-06T09:07:00.017Z] [INFO] Started execution at 06.05.2025 12:07:00 (Turkey time)
+[2025-05-06T09:07:00.017Z] [INFO] Scheduled fire date: 06.05.2025 12:07:00 (Turkey time)
+[2025-05-06T09:07:00.018Z] [INFO] Scheduled fire date: 06.05.2025 12:07:00 (Turkey time)
+[2025-05-06T09:07:00.018Z] [INFO] Executing Python script: /Users/mustafayigitguzel/Desktop/ProjectX/xops/src/app/api/start-job/example.py
+[2025-05-06T09:07:00.018Z] [INFO] Executing Python script: /Users/mustafayigitguzel/Desktop/ProjectX/xops/src/app/api/start-job/example.py
+[2025-05-06T09:07:00.218Z] [INFO] stdout: Python script executed at: 2025-05-06 12:07:00.203015
+Python version: 3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 08:22:19) [Clang 14.0.6 ]
+Current working directory: /Users/mustafayigitguzel/Desktop/ProjectX/xops
+Performing scheduled task...
+Task completed successfully! Result: 499999500000
+
+[2025-05-06T09:07:00.218Z] [SUCCESS] EXECUTION COMPLETED
+[2025-05-06T09:07:00.218Z] [SUCCESS] Completed at: 06.05.2025 12:07:00
+[2025-05-06T09:07:00.218Z] [SUCCESS] Execution time: 0.20 seconds
+[2025-05-06T09:07:00.275Z] [INFO] stdout: Python script executed at: 2025-05-06 12:07:00.259428
+Python version: 3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 08:22:19) [Clang 14.0.6 ]
+Current working directory: /Users/mustafayigitguzel/Desktop/ProjectX/xops
+Performing scheduled task...
+Task completed successfully! Result: 499999500000
+
+[2025-05-06T09:07:00.276Z] [SUCCESS] EXECUTION COMPLETED
+[2025-05-06T09:07:00.276Z] [SUCCESS] Completed at: 06.05.2025 12:07:00
+[2025-05-06T09:07:00.276Z] [SUCCESS] Execution time: 0.26 seconds
+[2025-05-06T09:08:00.013Z] [INFO] AUTOMATIC EXECUTION STARTED
+[2025-05-06T09:08:00.015Z] [INFO] AUTOMATIC EXECUTION STARTED
+[2025-05-06T09:08:00.015Z] [INFO] Started execution at 06.05.2025 12:08:00 (Turkey time)
+[2025-05-06T09:08:00.015Z] [INFO] Started execution at 06.05.2025 12:08:00 (Turkey time)
+[2025-05-06T09:08:00.015Z] [INFO] Scheduled fire date: 06.05.2025 12:08:00 (Turkey time)
+[2025-05-06T09:08:00.015Z] [INFO] Scheduled fire date: 06.05.2025 12:08:00 (Turkey time)
+[2025-05-06T09:08:00.015Z] [INFO] Executing Python script: /Users/mustafayigitguzel/Desktop/ProjectX/xops/src/app/api/start-job/example.py
+[2025-05-06T09:08:00.016Z] [INFO] Executing Python script: /Users/mustafayigitguzel/Desktop/ProjectX/xops/src/app/api/start-job/example.py
+[2025-05-06T09:08:00.195Z] [INFO] stdout: Python script executed at: 2025-05-06 12:08:00.180826
+Python version: 3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 08:22:19) [Clang 14.0.6 ]
+Current working directory: /Users/mustafayigitguzel/Desktop/ProjectX/xops
+Performing scheduled task...
+Task completed successfully! Result: 499999500000
+
+[2025-05-06T09:08:00.196Z] [SUCCESS] EXECUTION COMPLETED
+[2025-05-06T09:08:00.196Z] [SUCCESS] Completed at: 06.05.2025 12:08:00
+[2025-05-06T09:08:00.198Z] [SUCCESS] Execution time: 0.18 seconds
+[2025-05-06T09:08:00.247Z] [INFO] stdout: Python script executed at: 2025-05-06 12:08:00.233151
+Python version: 3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 08:22:19) [Clang 14.0.6 ]
+Current working directory: /Users/mustafayigitguzel/Desktop/ProjectX/xops
+Performing scheduled task...
+Task completed successfully! Result: 499999500000
+
+[2025-05-06T09:08:00.247Z] [SUCCESS] EXECUTION COMPLETED
+[2025-05-06T09:08:00.248Z] [SUCCESS] Completed at: 06.05.2025 12:08:00
+[2025-05-06T09:08:00.248Z] [SUCCESS] Execution time: 0.23 seconds
