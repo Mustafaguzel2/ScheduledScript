@@ -31,21 +31,20 @@ export function TablesList({ tables }: TablesListProps) {
       .toLowerCase()
       .includes(debouncedSearch.toLowerCase())
   );
+  const fetchTableDetails = async () => {
+    try {
+      const response = await fetch("/api/tables/details");
+      if (!response.ok) {
+        throw new Error("Failed to fetch table details");
+      }
+      const data = await response.json();
+      setTableDetails(data);
+    } catch (error) {
+      console.error("Error fetching table details:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchTableDetails = async () => {
-      try {
-        const response = await fetch('/api/tables/details');
-        if (!response.ok) {
-          throw new Error('Failed to fetch table details');
-        }
-        const data = await response.json();
-        setTableDetails(data);
-      } catch (error) {
-        console.error('Error fetching table details:', error);
-      }
-    };
-
     fetchTableDetails();
   }, []);
 
@@ -81,14 +80,16 @@ export function TablesList({ tables }: TablesListProps) {
         <div className="space-y-1 max-h-[calc(100vh-280px)] min-h-[400px] overflow-y-auto pr-2">
           {filteredTables.map((table) => {
             const columns = getTableColumns(table.schema, table.name);
-            
+
             return (
               <TooltipProvider key={table.id}>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <div className="px-4 py-2 rounded-md text-sm hover:bg-muted/50 cursor-pointer">
                       <div className="font-medium">{table.name}</div>
-                      <div className="text-xs text-muted-foreground">{table.schema}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {table.schema}
+                      </div>
                     </div>
                   </TooltipTrigger>
                   <TooltipContent className="max-w-[300px] p-2 bg-popover text-popover-foreground border border-border shadow-lg">
@@ -98,13 +99,19 @@ export function TablesList({ tables }: TablesListProps) {
                         <div className="space-y-1">
                           {columns.map((column) => (
                             <div key={column.column_name} className="text-xs">
-                              <span className="font-medium">{column.column_name}</span>
-                              <span className="text-muted-foreground ml-2">({column.data_type})</span>
+                              <span className="font-medium">
+                                {column.column_name}
+                              </span>
+                              <span className="text-muted-foreground ml-2">
+                                ({column.data_type})
+                              </span>
                             </div>
                           ))}
                         </div>
                       ) : (
-                        <div className="text-xs text-muted-foreground">Loading columns...</div>
+                        <div className="text-xs text-muted-foreground">
+                          Loading columns...
+                        </div>
                       )}
                     </div>
                   </TooltipContent>
@@ -121,4 +128,4 @@ export function TablesList({ tables }: TablesListProps) {
       </CardContent>
     </Card>
   );
-} 
+}
