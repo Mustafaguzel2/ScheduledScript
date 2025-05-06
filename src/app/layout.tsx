@@ -4,6 +4,8 @@ import { Toaster as SonnerToaster } from "sonner";
 import { ToastProvider } from "@/components/ui/toast";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Providers } from "./providers";
+
 export const metadata: Metadata = {
   title: {
     template: "%s | X-Ops",
@@ -34,7 +36,9 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="xops-theme"
           >
-            {children}
+            <Providers>
+              {children}
+            </Providers>
           </ThemeProvider>
         </ToastProvider>
         <Toaster />

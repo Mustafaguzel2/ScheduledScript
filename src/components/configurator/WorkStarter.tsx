@@ -1,10 +1,10 @@
 "use client";
 
 import ParameterStart from "./ParameterStart";
-import ScheduledStart from "./ScheduledStart";
 import { useState, useEffect, useRef } from "react";
 import TabButton from "@/components/tabButton";
 import { useRouter, useSearchParams } from "next/navigation";
+import ScheduledJobsManager from "./ScheduledJobsManager";
 
 // Define type for tab values
 type TabType = "parameter" | "scheduled";
@@ -57,7 +57,7 @@ export default function WorkerStarter() {
   // Map tabs to their respective components
   const tabComponents: Record<TabType, React.ReactNode> = {
     parameter: <ParameterStart />,
-    scheduled: <ScheduledStart />,
+    scheduled: <ScheduledJobsManager />,
   };
 
   return (
