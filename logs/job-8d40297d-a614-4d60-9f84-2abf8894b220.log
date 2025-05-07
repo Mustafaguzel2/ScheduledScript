@@ -1,5 +1,0 @@
-{"timestamp":"2025-05-06 20:02:26","level":"info","message":"Job scheduled with cron expression: * * * * * and script: worker.py"}
-{"timestamp":"2025-05-06 20:03:00","level":"info","message":"Job started execution"}
-{"timestamp":"2025-05-06 20:03:00","level":"error","message":"Script error: Traceback (most recent call last):"}
-{"timestamp":"2025-05-06 20:03:00","level":"error","message":"Script error: File \"/Users/mustafayigitguzel/Desktop/ProjectX/xops/src/scripts/worker.py\", line 2, in <module>\n    import aiohttp\nModuleNotFoundError: No module named 'aiohttp'"}
-{"timestamp":"2025-05-06 20:03:00","level":"error","message":"Script failed with exit code 1"}

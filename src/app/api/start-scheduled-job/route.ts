@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import { startScheduledJob } from "./cron";
-import { getJob, getAllJobs, deleteJob } from "@/lib/jobStore";
+import { startScheduledJob, executeJob } from "./cron";
+import { 
+  getJobFromFile, 
+  getAllJobsFromFile, 
+  deleteJobFromFile, 
+  initializeStoredJobs 
+} from "@/lib/fileJobStore";
+
+// Initialize stored jobs when the API route module loads
+// This ensures jobs persist across server restarts
+initializeStoredJobs(executeJob);
 
 export async function POST(request: NextRequest) {
   const { cronExpression, scriptName } = await request.json();
@@ -17,14 +26,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       { 
         message: "Job scheduled successfully",
-        job: {
-          id: job.id,
-          cronExpression: job.cronExpression,
-          status: job.status,
-          created: job.created,
-          nextRun: job.nextRun,
-          hasLogs: job.hasLogs
-        }
+        job
       },
       { status: 200 }
     );
@@ -40,36 +42,16 @@ export async function GET(request: NextRequest) {
   
   if (id) {
     // Get a specific job
-    const job = getJob(id);
+    const job = getJobFromFile(id);
     if (!job) {
       return NextResponse.json({ message: "Job not found" }, { status: 404 });
     }
     
-    return NextResponse.json({
-      job: {
-        id: job.id,
-        cronExpression: job.cronExpression,
-        status: job.status,
-        created: job.created,
-        lastRun: job.lastRun,
-        nextRun: job.nextRun,
-        hasLogs: job.hasLogs
-      }
-    });
+    return NextResponse.json({ job });
   } else {
     // Get all jobs
-    const jobs = getAllJobs();
-    return NextResponse.json({
-      jobs: jobs.map(job => ({
-        id: job.id,
-        cronExpression: job.cronExpression,
-        status: job.status,
-        created: job.created,
-        lastRun: job.lastRun,
-        nextRun: job.nextRun,
-        hasLogs: job.hasLogs
-      }))
-    });
+    const jobs = getAllJobsFromFile();
+    return NextResponse.json({ jobs });
   }
 }
 
@@ -81,7 +63,7 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ message: "Job ID is required" }, { status: 400 });
   }
   
-  const success = deleteJob(id);
+  const success = deleteJobFromFile(id);
   
   if (!success) {
     return NextResponse.json({ message: "Job not found or could not be deleted" }, { status: 404 });

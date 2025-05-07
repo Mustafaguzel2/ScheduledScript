@@ -2,19 +2,32 @@ import { scheduleJob } from "node-schedule";
 import { spawn } from "child_process";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
-import { storeJob, updateJobStatus, ScheduledJob } from "@/lib/jobStore";
 import { writeLog } from "@/lib/logger";
+import { 
+  storeJobToFile, 
+  updateJobStatusInFile, 
+  storeActiveJob,
+  getJobFromFile,
+  ScheduledJobData 
+} from "@/lib/fileJobStore";
 
-export async function startScheduledJob(cronExpression: string, scriptName: string): Promise<ScheduledJob> {
+export async function startScheduledJob(cronExpression: string, scriptName: string): Promise<ScheduledJobData> {
   const jobId = uuidv4();
   const scriptPath = path.resolve(process.cwd(), `src/scripts/${scriptName}`);
   
   writeLog(jobId, 'info', `Job scheduled with cron expression: ${cronExpression} and script: ${scriptName}`);
   
   const job = scheduleJob(cronExpression, () => {
+    // Check if job has been canceled before executing
+    const currentJobData = getJobFromFile(jobId);
+    if (currentJobData && currentJobData.canceled) {
+      console.log(`Skipping execution of canceled job ${jobId}`);
+      return;
+    }
+    
     console.log(`Job ${jobId} started`);
     writeLog(jobId, 'info', `Job started execution`);
-    updateJobStatus(jobId, 'running');
+    updateJobStatusInFile(jobId, 'running');
     
     try {
       const pythonProcess = spawn("python3", [scriptPath]);
@@ -29,27 +42,95 @@ export async function startScheduledJob(cronExpression: string, scriptName: stri
         const errorOutput = data.toString().trim();
         console.error(`Python script error: ${errorOutput}`);
         writeLog(jobId, 'error', `Script error: ${errorOutput}`);
-        updateJobStatus(jobId, 'failed');
+        updateJobStatusInFile(jobId, 'failed');
       });
 
       pythonProcess.on("close", (code) => {
         console.log(`Python script exited with code ${code}`);
         if (code === 0) {
           writeLog(jobId, 'success', `Script completed successfully with exit code ${code}`);
-          updateJobStatus(jobId, 'completed');
+          updateJobStatusInFile(jobId, 'completed');
         } else {
           writeLog(jobId, 'error', `Script failed with exit code ${code}`);
-          updateJobStatus(jobId, 'failed');
+          updateJobStatusInFile(jobId, 'failed');
         }
       });
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : String(error);
       console.error("Error starting job:", errorMessage);
       writeLog(jobId, 'error', `Error starting job: ${errorMessage}`);
-      updateJobStatus(jobId, 'failed');
+      updateJobStatusInFile(jobId, 'failed');
     }
   });
   
-  // Store and return the job details
-  return storeJob(jobId, cronExpression, job, scriptPath);
+  // Store active job in memory
+  storeActiveJob(jobId, job);
+  
+  // Get the next scheduled run
+  const nextRun = job.nextInvocation();
+  
+  // Create job data
+  const jobData: ScheduledJobData = {
+    id: jobId,
+    cronExpression,
+    status: 'scheduled',
+    created: new Date().toISOString(),
+    scriptPath,
+    scriptName,
+    nextRun: nextRun ? nextRun.toISOString() : undefined,
+    hasLogs: true,
+    canceled: false // Explicitly mark as not canceled
+  };
+  
+  // Store job data in file
+  storeJobToFile(jobData);
+  
+  return jobData;
+}
+
+// Function to handle job execution (used for initializing stored jobs)
+export function executeJob(jobId: string, scriptPath: string): void {
+  // Double-check if job has been canceled before executing
+  const currentJobData = getJobFromFile(jobId);
+  if (currentJobData && currentJobData.canceled) {
+    console.log(`Skipping execution of canceled job ${jobId}`);
+    return;
+  }
+  
+  console.log(`Job ${jobId} started`);
+  writeLog(jobId, 'info', `Job started execution`);
+  updateJobStatusInFile(jobId, 'running');
+  
+  try {
+    const pythonProcess = spawn("python3", [scriptPath]);
+
+    pythonProcess.stdout.on("data", (data) => {
+      const output = data.toString().trim();
+      console.log(`Python script output: ${output}`);
+      writeLog(jobId, 'info', `Script output: ${output}`);
+    });
+
+    pythonProcess.stderr.on("data", (data) => {
+      const errorOutput = data.toString().trim();
+      console.error(`Python script error: ${errorOutput}`);
+      writeLog(jobId, 'error', `Script error: ${errorOutput}`);
+      updateJobStatusInFile(jobId, 'failed');
+    });
+
+    pythonProcess.on("close", (code) => {
+      console.log(`Python script exited with code ${code}`);
+      if (code === 0) {
+        writeLog(jobId, 'success', `Script completed successfully with exit code ${code}`);
+        updateJobStatusInFile(jobId, 'completed');
+      } else {
+        writeLog(jobId, 'error', `Script failed with exit code ${code}`);
+        updateJobStatusInFile(jobId, 'failed');
+      }
+    });
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error("Error starting job:", errorMessage);
+    writeLog(jobId, 'error', `Error starting job: ${errorMessage}`);
+    updateJobStatusInFile(jobId, 'failed');
+  }
 }

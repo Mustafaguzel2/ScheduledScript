@@ -1,0 +1,28 @@
+{
+  "jobs": [
+    {
+      "id": "48c8f272-007d-42e8-a61b-3e040e209859",
+      "cronExpression": "* * * * *",
+      "status": "canceled",
+      "created": "2025-05-07T10:16:15.175Z",
+      "scriptPath": "/Users/mustafayigitguzel/Desktop/ProjectX/xops/src/scripts/example.py",
+      "scriptName": "example.py",
+      "nextRun": "2025-05-07T10:18:00.000Z",
+      "hasLogs": true,
+      "canceled": true,
+      "lastRun": "2025-05-07T10:17:00.034Z"
+    },
+    {
+      "id": "a6a34bed-0b5c-4e92-a518-0b8088f4326f",
+      "cronExpression": "* * * * *",
+      "status": "completed",
+      "created": "2025-05-07T10:16:47.576Z",
+      "scriptPath": "/Users/mustafayigitguzel/Desktop/ProjectX/xops/src/scripts/simple_worker.py",
+      "scriptName": "simple_worker.py",
+      "nextRun": "2025-05-07T10:19:00.000Z",
+      "hasLogs": true,
+      "canceled": false,
+      "lastRun": "2025-05-07T10:18:00.016Z"
+    }
+  ]
+}

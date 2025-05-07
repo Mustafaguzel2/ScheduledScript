@@ -12,10 +12,10 @@ import { JobLogViewer } from './JobLogViewer';
 export interface JobData {
   id: string;
   cronExpression: string;
-  status: 'scheduled' | 'running' | 'completed' | 'failed';
-  created: string;
-  lastRun?: string;
-  nextRun?: string;
+  status: 'scheduled' | 'running' | 'completed' | 'failed' | 'canceled';
+  created: Date;
+  lastRun?: Date;
+  nextRun?: Date;
   hasLogs?: boolean;
 }
 
@@ -24,6 +24,7 @@ interface JobListProps {
   isLoading: boolean;
   error: Error | null;
   onDelete: (id: string) => Promise<void>;
+  isDeleting?: boolean;
 }
 
 // Function to get a status badge color
@@ -37,12 +38,14 @@ const getStatusColor = (status: string) => {
       return 'bg-green-100 text-green-800';
     case 'failed':
       return 'bg-red-100 text-red-800';
+    case 'canceled':
+      return 'bg-gray-500 text-white';
     default:
       return 'bg-gray-100 text-gray-800';
   }
 };
 
-export function JobList({ jobs, isLoading, error, onDelete }: JobListProps) {
+export function JobList({ jobs, isLoading, error, onDelete, isDeleting = false }: JobListProps) {
   const queryClient = useQueryClient();
 
   // Mutation to delete a job
@@ -97,9 +100,9 @@ export function JobList({ jobs, isLoading, error, onDelete }: JobListProps) {
                       {job.status}
                     </Badge>
                   </TableCell>
-                  <TableCell>{job.created ? format(new Date(job.created), 'PPp') : '-'}</TableCell>
-                  <TableCell>{job.lastRun ? format(new Date(job.lastRun), 'PPp') : '-'}</TableCell>
-                  <TableCell>{job.nextRun ? format(new Date(job.nextRun), 'PPp') : '-'}</TableCell>
+                  <TableCell>{format(job.created, 'PPp')}</TableCell>
+                  <TableCell>{job.lastRun ? format(job.lastRun, 'PPp') : '-'}</TableCell>
+                  <TableCell>{job.nextRun ? format(job.nextRun, 'PPp') : '-'}</TableCell>
                   <TableCell>
                     <div className="flex items-center space-x-2">
                       {job.hasLogs && (
@@ -109,7 +112,7 @@ export function JobList({ jobs, isLoading, error, onDelete }: JobListProps) {
                         variant="destructive"
                         size="sm"
                         onClick={() => handleDelete(job.id)}
-                        disabled={deleteMutation.isPending}
+                        disabled={deleteMutation.isPending || isDeleting}
                       >
                         Delete
                       </Button>

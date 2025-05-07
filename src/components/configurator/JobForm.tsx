@@ -11,9 +11,10 @@ import { CronFormatReference } from './CronFormatReference';
 
 interface JobFormProps {
   onSchedule: (jobData: { cronExpression: string; scriptName: string }) => Promise<unknown>;
+  isLoading?: boolean;
 }
 
-export function JobForm({ onSchedule }: JobFormProps) {
+export function JobForm({ onSchedule, isLoading = false }: JobFormProps) {
   const [cronExpression, setCronExpression] = useState<string>('');
   const [scriptName, setScriptName] = useState<string>('example.py');
   const [isCronHelpOpen, setIsCronHelpOpen] = useState<boolean>(false);
@@ -64,6 +65,7 @@ export function JobForm({ onSchedule }: JobFormProps) {
                   variant="ghost" 
                   size="sm" 
                   onClick={() => setIsCronHelpOpen(!isCronHelpOpen)}
+                  disabled={isLoading || scheduleMutation.isPending}
                 >
                   {isCronHelpOpen ? 'Hide Help' : 'Show Help'}
                 </Button>
@@ -74,6 +76,7 @@ export function JobForm({ onSchedule }: JobFormProps) {
                 value={cronExpression}
                 onChange={(e) => setCronExpression(e.target.value)}
                 required
+                disabled={isLoading || scheduleMutation.isPending}
               />
               <p className="text-sm text-muted-foreground">
                 Format: minute hour day-of-month month day-of-week
@@ -92,12 +95,13 @@ export function JobForm({ onSchedule }: JobFormProps) {
                 placeholder="example.py"
                 value={scriptName}
                 onChange={(e) => setScriptName(e.target.value)}
+                disabled={isLoading || scheduleMutation.isPending}
               />
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit" disabled={scheduleMutation.isPending}>
-              {scheduleMutation.isPending ? 'Scheduling...' : 'Schedule Job'}
+            <Button type="submit" disabled={isLoading || scheduleMutation.isPending}>
+              {isLoading || scheduleMutation.isPending ? 'Scheduling...' : 'Schedule Job'}
             </Button>
           </CardFooter>
         </form>
