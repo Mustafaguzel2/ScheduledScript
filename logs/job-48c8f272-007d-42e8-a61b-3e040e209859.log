@@ -1,7 +1,0 @@
-{"timestamp":"2025-05-07 13:16:15","level":"info","message":"Job scheduled with cron expression: * * * * * and script: example.py"}
-{"timestamp":"2025-05-07 13:17:00","level":"info","message":"Job started execution"}
-{"timestamp":"2025-05-07 13:17:00","level":"info","message":"Job started execution"}
-{"timestamp":"2025-05-07 13:17:00","level":"info","message":"Script output: Python script executed at: 2025-05-07 13:17:00.212721\nPython version: 3.13.2 (main, Feb  4 2025, 14:51:09) [Clang 16.0.0 (clang-1600.0.26.6)]\nCurrent working directory: /Users/mustafayigitguzel/Desktop/ProjectX/xops\nPerforming scheduled task...\nTask completed successfully! Result: 499999500000"}
-{"timestamp":"2025-05-07 13:17:00","level":"info","message":"Script output: Python script executed at: 2025-05-07 13:17:00.212718\nPython version: 3.13.2 (main, Feb  4 2025, 14:51:09) [Clang 16.0.0 (clang-1600.0.26.6)]\nCurrent working directory: /Users/mustafayigitguzel/Desktop/ProjectX/xops\nPerforming scheduled task...\nTask completed successfully! Result: 499999500000"}
-{"timestamp":"2025-05-07 13:17:00","level":"success","message":"Script completed successfully with exit code 0"}
-{"timestamp":"2025-05-07 13:17:00","level":"success","message":"Script completed successfully with exit code 0"}

@@ -141,15 +141,11 @@ export function deleteJobFromFile(id: string): boolean {
     }
   }
   
-  // Instead of removing, mark the job as canceled
-  jobs[jobIndex] = {
-    ...jobs[jobIndex],
-    canceled: true,
-    status: 'canceled', // Now properly typed
-  };
+  // Actually remove the job from the list instead of just marking it as canceled
+  jobs.splice(jobIndex, 1);
   
   writeJobsToFile(jobs);
-  console.log(`Job ${id} marked as canceled`);
+  console.log(`Job ${id} completely removed from jobs file`);
   return true;
 }
 
@@ -182,9 +178,9 @@ export function initializeStoredJobs(jobHandler: (id: string, scriptPath: string
   cleanupCanceledJobs();
   
   jobs.forEach(jobData => {
-    // Skip jobs that are marked as canceled
-    if (jobData.canceled) {
-      console.log(`Skipping initialization of canceled job ${jobData.id}`);
+    // Skip jobs that are marked as canceled or are missing critical data
+    if (jobData.canceled || !jobData.scriptPath || !jobData.cronExpression) {
+      console.log(`Skipping initialization of job ${jobData.id} - canceled or invalid configuration`);
       return;
     }
     
@@ -198,7 +194,7 @@ export function initializeStoredJobs(jobHandler: (id: string, scriptPath: string
             if (currentJobData && !currentJobData.canceled) {
               jobHandler(jobData.id, jobData.scriptPath);
             } else {
-              console.log(`Skipping execution of canceled job ${jobData.id}`);
+              console.log(`Skipping execution of job ${jobData.id} - job no longer exists or was canceled`);
             }
           }
         });

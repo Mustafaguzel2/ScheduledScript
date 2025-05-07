@@ -16,7 +16,7 @@ interface JobFormProps {
 
 export function JobForm({ onSchedule, isLoading = false }: JobFormProps) {
   const [cronExpression, setCronExpression] = useState<string>('');
-  const [scriptName, setScriptName] = useState<string>('example.py');
+  const [scriptName, setScriptName] = useState<string>('simple_worker.py');
   const [isCronHelpOpen, setIsCronHelpOpen] = useState<boolean>(false);
   const queryClient = useQueryClient();
 

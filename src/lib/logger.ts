@@ -58,7 +58,8 @@ export function readLogs(jobId: string): LogEntry[] {
     return fileContent
       .split('\n')
       .filter(line => line.trim() !== '')
-      .map(line => JSON.parse(line) as LogEntry);
+      .map(line => JSON.parse(line) as LogEntry)
+      .reverse(); // Reverse order to show newest logs first
   } catch (error) {
     console.error(`Error reading logs for job ${jobId}:`, error);
     return [];

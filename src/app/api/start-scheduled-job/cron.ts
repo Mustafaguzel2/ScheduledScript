@@ -18,10 +18,12 @@ export async function startScheduledJob(cronExpression: string, scriptName: stri
   writeLog(jobId, 'info', `Job scheduled with cron expression: ${cronExpression} and script: ${scriptName}`);
   
   const job = scheduleJob(cronExpression, () => {
-    // Check if job has been canceled before executing
+    // Always get fresh job data to check if job has been canceled
     const currentJobData = getJobFromFile(jobId);
-    if (currentJobData && currentJobData.canceled) {
-      console.log(`Skipping execution of canceled job ${jobId}`);
+    
+    // If job doesn't exist in file or is marked as canceled, don't execute
+    if (!currentJobData || currentJobData.canceled) {
+      console.log(`Skipping execution of job ${jobId} because it was deleted or canceled`);
       return;
     }
     
@@ -90,10 +92,12 @@ export async function startScheduledJob(cronExpression: string, scriptName: stri
 
 // Function to handle job execution (used for initializing stored jobs)
 export function executeJob(jobId: string, scriptPath: string): void {
-  // Double-check if job has been canceled before executing
+  // Always get fresh job data to check if job has been canceled
   const currentJobData = getJobFromFile(jobId);
-  if (currentJobData && currentJobData.canceled) {
-    console.log(`Skipping execution of canceled job ${jobId}`);
+  
+  // If job doesn't exist in file or is marked as canceled, don't execute
+  if (!currentJobData || currentJobData.canceled) {
+    console.log(`Skipping execution of job ${jobId} because it was deleted or canceled`);
     return;
   }
   

@@ -4,8 +4,12 @@ import {
   getJobFromFile, 
   getAllJobsFromFile, 
   deleteJobFromFile, 
-  initializeStoredJobs 
+  initializeStoredJobs,
+  cleanupCanceledJobs
 } from "@/lib/fileJobStore";
+
+// Clean up canceled jobs first, then initialize stored jobs
+cleanupCanceledJobs();
 
 // Initialize stored jobs when the API route module loads
 // This ensures jobs persist across server restarts

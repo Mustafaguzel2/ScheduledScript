@@ -1,1 +1,0 @@
-{"timestamp":"2025-05-06 21:36:02","level":"info","message":"Job scheduled with cron expression: * * * * * and script: example.py"}
