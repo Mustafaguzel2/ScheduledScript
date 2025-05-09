@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { ToastProvider } from "@/components/ui/toast";
 import Sidebar from "@/components/sidebar";
 import { Toaster } from "@/components/ui/toaster";
@@ -23,7 +23,9 @@ export default function PanelLayoutWrapper({
         }`}
       >
         <div className="fixed h-screen">
-          <Sidebar collapsed={isCollapsed} onCollapsedChange={setIsCollapsed} />
+          <Suspense fallback={<div className="h-screen w-16 bg-primary animate-pulse"></div>}>
+            <Sidebar collapsed={isCollapsed} onCollapsedChange={setIsCollapsed} />
+          </Suspense>
         </div>
       </div>
 
@@ -36,7 +38,9 @@ export default function PanelLayoutWrapper({
                 isCollapsed ? "pl-8" : "pl-12"
               }`}
             >
-              {children}
+              <Suspense fallback={<div className="w-full h-full animate-pulse bg-gray-200 rounded-lg"></div>}>
+                {children}
+              </Suspense>
             </div>
             <Toaster />
           </ToastProvider>

@@ -5,13 +5,21 @@ import { useState, useEffect, useRef } from "react";
 import TabButton from "@/components/tabButton";
 import { useRouter, useSearchParams } from "next/navigation";
 import ScheduledJobsManager from "./schedule/ScheduledJobsManager";
+import { TablesList } from "@/components/configurator/TablesList";
 
 type TabType = "parameter" | "scheduled";
+
+type Table = {
+  id: string;
+  name: string;
+  schema: string;
+};
 
 export default function WorkerStarter() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialRender = useRef(true);
+  const [tables, setTables] = useState<Table[]>([]);
 
   const getInitialTab = (): TabType => {
     const tabParam = searchParams.get("tab");
@@ -27,6 +35,25 @@ export default function WorkerStarter() {
     url.searchParams.set("tab", tab);
     router.replace(url.pathname + url.search);
   };
+
+  // Fetch tables data
+  async function fetchTables() {
+    try {
+      const response = await fetch("/api/tables/list");
+      if (!response.ok) {
+        throw new Error("Failed to fetch tables");
+      }
+
+      const data = await response.json();
+      setTables(data.tables || []);
+    } catch (err) {
+      console.error("Error fetching tables:", err);
+    }
+  }
+
+  useEffect(() => {
+    fetchTables();
+  }, []);
 
   useEffect(() => {
     const tabParam = searchParams.get("tab") as TabType | null;
@@ -61,7 +88,7 @@ export default function WorkerStarter() {
           Worker Starter
         </h2>
       </div>
-      <div className="p-4">
+      <div className="p-6">
         {/* Tab navigation */}
         <div
           className="flex space-x-1 rounded-md bg-muted p-1 mb-6"
@@ -89,15 +116,19 @@ export default function WorkerStarter() {
           </TabButton>
         </div>
 
-        <div className="w-full">
-          <div className="w-full">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Left column - Tables list */}
+          <div className="lg:col-span-4 xl:col-span-3">
+            <TablesList tables={tables} />
+          </div>
+          
+          {/* Right column - Tab content */}
+          <div className="lg:col-span-8 xl:col-span-9">
             <div
               id="parameter-panel"
               role="tabpanel"
               aria-labelledby="parameter-tab"
-              className="w-full"
-              hidden={activeTab !== "parameter"}
-              style={{ display: activeTab !== "parameter" ? "none" : "block" }}
+              className={`w-full min-h-[500px] ${activeTab !== "parameter" ? "hidden" : ""}`}
             >
               {activeTab === "parameter" && tabComponents.parameter}
             </div>
@@ -105,9 +136,7 @@ export default function WorkerStarter() {
               id="scheduled-panel"
               role="tabpanel"
               aria-labelledby="scheduled-tab"
-              className="w-full"
-              hidden={activeTab !== "scheduled"}
-              style={{ display: activeTab !== "scheduled" ? "none" : "block" }}
+              className={`w-full min-h-[500px] ${activeTab !== "scheduled" ? "hidden" : ""}`}
             >
               {activeTab === "scheduled" && tabComponents.scheduled}
             </div>
