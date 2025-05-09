@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import ScheduledJobsManager from '@/components/configurator/ScheduledJobsManager';
+import ScheduledJobsManager from '@/components/configurator/schedule/ScheduledJobsManager';
 
 export const metadata: Metadata = {
   title: 'Scheduled Jobs Management',

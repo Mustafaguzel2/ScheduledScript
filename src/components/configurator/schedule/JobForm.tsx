@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
+import { Button } from '../../ui/button';
+import { Input } from '../../ui/input';
+import { Label } from '../../ui/label';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../ui/card';
 import { toast } from 'sonner';
 import { CronFormatReference } from './CronFormatReference';
 
@@ -50,7 +50,7 @@ export function JobForm({ onSchedule, isLoading = false }: JobFormProps) {
 
   return (
     <>
-      <Card>
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Schedule New Job</CardTitle>
           <CardDescription>Enter a cron expression to schedule a new job</CardDescription>

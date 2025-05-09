@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import ConfiguratorPage from "@/components/configurator/ConfigurationPage";
+import ConfiguratorPage from "@/components/configurator/schedule/ConfigurationPage";
 
 export const metadata: Metadata = {
   title: "Configurator",
