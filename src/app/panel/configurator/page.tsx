@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
-import WorkStarter from "@/components/configurator/WorkStarter";
-import LoadingAnimation from "@/components/loadingAnimation";
+import WorkStarter from "../../../components/configurator/WorkStarter";
+import LoadingAnimation from "../../../components/loadingAnimation";
 
 export const metadata: Metadata = {
   title: "Configurator",

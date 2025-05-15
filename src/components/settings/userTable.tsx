@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { DataTable } from "./dataTable";
 import { columns } from "./columns";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "../../hooks/use-toast";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,10 +13,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogDescription,
-} from "@/components/ui/alert-dialog";
-import { User } from "@/types/user";
-import { Button } from "@/components/ui/button";
-import LoadingAnimation from "@/components/loadingAnimation";
+} from "../../components/ui/alert-dialog";
+import { User } from "../../types/user";
+import { Button } from "../../components/ui/button";
+import LoadingAnimation from "../../components/loadingAnimation";
 export default function UserTable() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);

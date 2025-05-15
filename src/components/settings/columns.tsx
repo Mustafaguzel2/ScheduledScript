@@ -1,7 +1,7 @@
 import React from "react";
 import { ColumnDef, Row } from "@tanstack/react-table";
 import { MoreHorizontal, Trash2, ToggleLeft, ToggleRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,9 +9,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { User } from "@/types/user";
-import { useToast } from "@/hooks/use-toast";
+} from "../../components/ui/dropdown-menu";
+import { User } from "../../types/user";
+import { useToast } from "../../hooks/use-toast";
 
 interface StatusCellProps {
   row: Row<User>;

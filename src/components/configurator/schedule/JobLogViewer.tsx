@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Button } from '../../ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../SimpleDialog';
-import { LogEntry } from '@/lib/logger';
-import { ScrollArea } from '../SimpleScrollArea';
+import { Button } from '../../../components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../../../components/ui/dialog';
+import { LogEntry } from '../../../lib/logger';
+import { ScrollArea } from '../../../components/ui/scroll-area';
 
 interface JobLogViewerProps {
   jobId: string;

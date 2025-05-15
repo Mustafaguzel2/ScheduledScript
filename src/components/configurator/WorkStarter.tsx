@@ -2,10 +2,10 @@
 
 import ParameterStart from "./parameter/ParameterStart";
 import { useState, useEffect, useRef } from "react";
-import TabButton from "@/components/tabButton";
+import TabButton from "../../components/tabButton";
 import { useRouter, useSearchParams } from "next/navigation";
 import ScheduledJobsManager from "./schedule/ScheduledJobsManager";
-import { TablesList } from "@/components/configurator/TablesList";
+import { TablesList } from "../../components/configurator/TablesList";
 
 type TabType = "parameter" | "scheduled";
 

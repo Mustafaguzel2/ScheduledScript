@@ -1,4 +1,4 @@
-import Tab from "@/types/tab";
+import Tab from "../types/tab";
 
 export default function TabButton({
   value,

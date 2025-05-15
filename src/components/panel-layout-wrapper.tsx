@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { ToastProvider } from "@/components/ui/toast";
-import Sidebar from "@/components/sidebar";
-import { Toaster } from "@/components/ui/toaster";
+import { ToastProvider } from "./ui/toast";
+import Sidebar from "./sidebar";
+import { Toaster } from "./ui/toaster";
 
 interface PanelLayoutWrapperProps {
   children: React.ReactNode;

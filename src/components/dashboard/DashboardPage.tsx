@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import LoadingAnimation from "@/components/loadingAnimation";
-import { useDebounce } from "@/hooks/useDebounce";
-import { TableSearchBar } from "@/components/dashboard/TableSearchBar";
-import { NoTablesFound } from "@/components/dashboard/NoTablesFound";
-import { TableCard } from "@/components/dashboard/TableCard";
-import { TableInfo } from "@/app/api/utils/db";
+import LoadingAnimation from "../../components/loadingAnimation";
+import { useDebounce } from "../../hooks/useDebounce";
+import { TableSearchBar } from "../../components/dashboard/TableSearchBar";
+import { NoTablesFound } from "../../components/dashboard/NoTablesFound";
+import { TableCard } from "../../components/dashboard/TableCard";
+import { TableInfo } from "../../app/api/utils/db";
 
 export default function DashboardPage() {
   const [tables, setTables] = useState<TableInfo[]>([]);

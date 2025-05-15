@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../../components/ui/button";
 import { NodeTypeSelector } from "./NodeTypeSelector";
 import { SelectedNodesList } from "./SelectedNodesList";
 import { ColumnManager } from "./ColumnManager";
-import { NodeSelection } from "@/types/parameter";
+import { NodeSelection } from "../../../types/parameter";
 
 export default function ParameterStart() {
   const [selectedNodes, setSelectedNodes] = useState<NodeSelection[]>([]);

@@ -1,8 +1,8 @@
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import { TableColumn, TableInfo } from "@/app/api/utils/db";
+import { Card, CardHeader, CardTitle } from "../../components/ui/card";
+import { Input } from "../../components/ui/input";
+import { Checkbox } from "../../components/ui/checkbox";
+import { Label } from "../../components/ui/label";
+import { TableColumn, TableInfo } from "../../app/api/utils/db";
 
 interface TableCardProps {
   tableInfo: TableInfo;

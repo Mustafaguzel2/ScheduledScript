@@ -1,9 +1,9 @@
 "use client";
 
-import { TablesList } from "@/components/configurator/TablesList";
+import { TablesList } from "../../../components/configurator/TablesList";
 import { useEffect, useState } from "react";
-import LoadingAnimation from "@/components/loadingAnimation";
-import WorkerStarter from "@/components/configurator/WorkStarter";
+import LoadingAnimation from "../../../components/loadingAnimation";
+import WorkerStarter from "../../../components/configurator/WorkStarter";
 
 type Table = {
   id: string;

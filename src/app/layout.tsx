@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster as SonnerToaster } from "sonner";
-import { ToastProvider } from "@/components/ui/toast";
-import { Toaster } from "@/components/ui/toaster";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ToastProvider } from "../components/ui/toast";
+import { Toaster } from "../components/ui/toaster";
+import { ThemeProvider } from "../components/theme-provider";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {

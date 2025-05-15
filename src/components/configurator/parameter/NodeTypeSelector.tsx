@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "../../../components/ui/button";
+import { Input } from "../../../components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui/card";
 import { Search } from "lucide-react";
 // import { fetchDiscoveryNodeTypes } from "@/lib/nodeTypes"; // No longer needed in frontend
 import {
@@ -10,8 +10,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { ScrollArea } from "@/components/ui/scroll-area";
+} from "../../../components/ui/select";
+import { ScrollArea } from "../../../components/ui/scroll-area";
 
 // Optionally, you can add a token prop if needed
 

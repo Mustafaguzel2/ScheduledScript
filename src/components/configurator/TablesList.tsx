@@ -1,15 +1,15 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
+import { Input } from "../../components/ui/input";
 import { Search } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useDebounce } from "@/hooks/useDebounce";
+import { useDebounce } from "../../hooks/useDebounce";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { TableInfo } from "@/app/api/utils/db";
+} from "../../components/ui/tooltip";
+import { TableInfo } from "../../app/api/utils/db";
 
 type Table = {
   id: string;

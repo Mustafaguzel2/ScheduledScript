@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import PanelLayoutWrapper from "@/components/panel-layout-wrapper";
+import PanelLayoutWrapper from "../../components/panel-layout-wrapper";
 import { Suspense } from "react";
-import LoadingAnimation from "@/components/loadingAnimation";
+import LoadingAnimation from "../../components/loadingAnimation";
 
 export const metadata: Metadata = {
   title: {
