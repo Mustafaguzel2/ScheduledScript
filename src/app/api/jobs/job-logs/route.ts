@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readLogs } from "@/lib/logger";
+import { readLogs } from "../../../../lib/logger";
 
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);

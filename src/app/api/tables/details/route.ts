@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getTableDetails } from "@/app/api/utils/db";
+import { getTableDetails } from "../../utils/db";
 
 export async function GET() {
   try {

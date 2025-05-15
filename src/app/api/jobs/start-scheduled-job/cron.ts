@@ -2,14 +2,14 @@ import { scheduleJob } from "node-schedule";
 import { spawn } from "child_process";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
-import { writeLog } from "@/lib/logger";
+import { writeLog } from "../../../../lib/logger";
 import { 
   storeJobToFile, 
   updateJobStatusInFile, 
   storeActiveJob,
   getJobFromFile,
   ScheduledJobData 
-} from "@/lib/fileJobStore";
+} from "../../../../lib/fileJobStore";
 
 export async function startScheduledJob(cronExpression: string, scriptName: string): Promise<ScheduledJobData> {
   const jobId = uuidv4();

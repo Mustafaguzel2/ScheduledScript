@@ -6,7 +6,7 @@ import {
   deleteJobFromFile, 
   initializeStoredJobs,
   cleanupCanceledJobs
-} from "@/lib/fileJobStore";
+} from "../../../../lib/fileJobStore";
 
 // Clean up canceled jobs first, then initialize stored jobs
 cleanupCanceledJobs();
