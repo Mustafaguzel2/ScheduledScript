@@ -15,37 +15,20 @@ export default function PanelLayoutWrapper({
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-100">
+    <div className="flex h-screen overflow-hidden bg-background">
       {/* Sidebar */}
-      <div
-        className={`flex-none transition-all duration-300 ease-in-out ${
-          isCollapsed ? "w-16" : "w-64"
-        }`}
-      >
-        <div className="fixed h-screen">
-          <Suspense fallback={<div className="h-screen w-16 bg-primary animate-pulse"></div>}>
-            <Sidebar collapsed={isCollapsed} onCollapsedChange={setIsCollapsed} />
-          </Suspense>
-        </div>
-      </div>
-
+      <Suspense fallback={<div className="h-screen w-20 bg-card animate-pulse"></div>}>
+        <Sidebar collapsed={isCollapsed} onCollapsedChange={setIsCollapsed} />
+      </Suspense>
       {/* Main content - scrollable */}
-      <div className="flex-1 overflow-y-auto">
-        <main className="h-full">
-          <ToastProvider>
-            <div
-              className={`flex min-h-screen p-6 transition-all duration-300 ease-in-out ${
-                isCollapsed ? "pl-8" : "pl-12"
-              }`}
-            >
-              <Suspense fallback={<div className="w-full h-full animate-pulse bg-gray-200 rounded-lg"></div>}>
-                {children}
-              </Suspense>
-            </div>
-            <Toaster />
-          </ToastProvider>
-        </main>
-      </div>
+      <main className="flex-1 overflow-y-auto h-full">
+        <ToastProvider>
+          <Suspense fallback={<div className="w-full h-full animate-pulse bg-background rounded-lg"></div>}>
+            {children}
+          </Suspense>
+          <Toaster />
+        </ToastProvider>
+      </main>
     </div>
   );
 }

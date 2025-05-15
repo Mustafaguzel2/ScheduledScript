@@ -90,45 +90,48 @@ export default function WorkerStarter() {
       </div>
       <div className="p-6">
         {/* Tab navigation */}
-        <div
-          className="flex space-x-1 rounded-md bg-muted p-1 mb-6"
-          role="tablist"
-          aria-label="Worker Starter Options"
-        >
-          <TabButton
-            value="parameter"
-            activeTab={activeTab}
-            onClick={() => handleTabChange("parameter")}
-            aria-controls="parameter-panel"
-            aria-selected={activeTab === "parameter"}
-          >
-            Parameter
-          </TabButton>
-
-          <TabButton
-            value="scheduled"
-            activeTab={activeTab}
-            onClick={() => handleTabChange("scheduled")}
-            aria-controls="scheduled-panel"
-            aria-selected={activeTab === "scheduled"}
-          >
-            Scheduled
-          </TabButton>
-        </div>
 
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left column - Tables list */}
           <div className="lg:col-span-4 xl:col-span-3">
             <TablesList tables={tables} />
           </div>
-          
+
           {/* Right column - Tab content */}
           <div className="lg:col-span-8 xl:col-span-9">
+            <div
+              className="flex space-x-1 rounded-md bg-muted p-1 mb-6"
+              role="tablist"
+              aria-label="Worker Starter Options"
+            >
+              <TabButton
+                value="parameter"
+                activeTab={activeTab}
+                onClick={() => handleTabChange("parameter")}
+                aria-controls="parameter-panel"
+                aria-selected={activeTab === "parameter"}
+              >
+                Parameter
+              </TabButton>
+
+              <TabButton
+                value="scheduled"
+                activeTab={activeTab}
+                onClick={() => handleTabChange("scheduled")}
+                aria-controls="scheduled-panel"
+                aria-selected={activeTab === "scheduled"}
+              >
+                Scheduled
+              </TabButton>
+            </div>
+
             <div
               id="parameter-panel"
               role="tabpanel"
               aria-labelledby="parameter-tab"
-              className={`w-full min-h-[500px] ${activeTab !== "parameter" ? "hidden" : ""}`}
+              className={`w-full min-h-[500px] ${
+                activeTab !== "parameter" ? "hidden" : ""
+              }`}
             >
               {activeTab === "parameter" && tabComponents.parameter}
             </div>
@@ -136,7 +139,9 @@ export default function WorkerStarter() {
               id="scheduled-panel"
               role="tabpanel"
               aria-labelledby="scheduled-tab"
-              className={`w-full min-h-[500px] ${activeTab !== "scheduled" ? "hidden" : ""}`}
+              className={`w-full min-h-[500px] ${
+                activeTab !== "scheduled" ? "hidden" : ""
+              }`}
             >
               {activeTab === "scheduled" && tabComponents.scheduled}
             </div>

@@ -143,7 +143,7 @@ export default function UserTable() {
   }
 
   return (
-    <div className="min-h-screen min-w-full mx-5 py-16">
+    <div className="min-h-screen min-w-full">
       <DataTable columns={columns(isAdmin)} data={users} />
       <AlertDialog
         open={isDeleteDialogOpen}

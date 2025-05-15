@@ -8,11 +8,10 @@ import { LogOut } from "lucide-react";
 import { ModeToggle } from "./theme";
 
 type LogoutProps = {
-  className?: string;
   isCollapsed?: boolean;
 };
 
-export default function Logout({ className, isCollapsed }: LogoutProps) {
+export default function Logout({ isCollapsed }: LogoutProps) {
   const { toast } = useToast();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -46,18 +45,20 @@ export default function Logout({ className, isCollapsed }: LogoutProps) {
   };
 
   return (
-    <div
-      className={`flex flex-col gap-4 w-full ${className || ""} ${
-        isCollapsed ? "items-center" : ""
-      }`}
-    >
-      <div className="flex justify-center">
+    <div className="flex flex-col space-y-2">
+      {/* Theme controller */}
+      <div className="px-1.5">
         <ModeToggle />
       </div>
+      {/* Logout */}
       <Button
         variant="ghost"
-        className={`flex items-center text-secondary-foreground hover:text-secondary-foreground/80 hover:bg-secondary/10 ${
-          isCollapsed ? "justify-center p-2 w-10 h-10" : "gap-3"
+        className={`
+          flex flex-row
+          text-secondary-foreground hover:text-secondary-foreground/80 hover:bg-secondary/10 
+          gap-4
+          py-1.5
+          justify-start
         }`}
         onClick={handleLogout}
         disabled={isLoading}

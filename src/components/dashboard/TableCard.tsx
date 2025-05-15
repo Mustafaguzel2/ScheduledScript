@@ -46,7 +46,7 @@ export function TableCard({
   return (
     <Card className="overflow-hidden border-2">
       <CardHeader className="bg-muted/30 border-b-2">
-        <CardTitle className="text-lg text-foreground">
+        <CardTitle className="text-lg font-medium text-foreground">
           {tableInfo.schema}.{tableInfo.table}
           <span className="ml-2 text-sm text-muted-foreground">
             ({tableInfo.type === 'VIEW' ? 'View' : 'Table'})
@@ -59,7 +59,7 @@ export function TableCard({
           <div className="col-span-3">
             <div className="flex flex-col gap-4">
               <div>
-                <h3 className="text-sm font-medium text-muted-foreground mb-2">
+                <h3 className="text-xs font-semibold uppercase text-muted-foreground text-left py-2">
                   Structure
                 </h3>
                 <Input

@@ -10,7 +10,7 @@ interface ADGroup {
 
 // LDAP Configuration
 const config = {
-  url: process.env.LDAP_URL || "",
+  url: process.env.NEXT_PUBLIC_LDAP_URL || "",
   baseDN: process.env.LDAP_BASE_DN || "",
 };
 
@@ -31,12 +31,12 @@ export async function GET() {
     }
 
     const session = JSON.parse(sessionCookie.value);
-    const { username, password } = session;
+    // Service account ile AD bağlantısı
     const ad = new ActiveDirectory({
       url: config.url,
       baseDN: config.baseDN,
-      username,
-      password,
+      username: process.env.LDAP_SERVICE_USER || "",
+      password: process.env.LDAP_SERVICE_PASS || "",
     });
 
     const users = await new Promise<User[]>((resolve, reject) => {
@@ -77,10 +77,14 @@ export async function GET() {
       })
     );
 
+    // Admin bilgisini session'dan döndür
+    const isAdmin = !!session.isMember;
+
     return NextResponse.json(
       {
         message: "Users and their groups fetched successfully.",
         users: usersWithGroups,
+        isAdmin,
       },
       { status: 200 }
     );

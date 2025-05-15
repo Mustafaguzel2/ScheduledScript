@@ -14,7 +14,7 @@ interface JobLogViewerProps {
 
 // Function to fetch job logs
 const fetchJobLogs = async (jobId: string): Promise<LogEntry[]> => {
-  const response = await fetch(`/api/job-logs?jobId=${jobId}`);
+  const response = await fetch(`/api/jobs/job-logs?jobId=${jobId}`);
   
   if (!response.ok) {
     throw new Error('Failed to fetch logs');

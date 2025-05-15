@@ -1,12 +1,4 @@
 "use client";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
-} from "./ui/card";
 import Logout from "./logout";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "./ui/button";
@@ -16,58 +8,48 @@ import Link from "next/link";
 interface SidebarProps {
   collapsed: boolean;
   onCollapsedChange: (collapsed: boolean) => void;
-  className?: string;
 }
 
 export default function Sidebar({
   collapsed,
   onCollapsedChange,
-  className,
 }: SidebarProps) {
   return (
-    <div className={`h-full ${collapsed ? "w-24" : "w-64"}`}>
-      <Card
-        className={`h-full rounded-none shadow-2xl shadow-popover-foreground text-secondary grid grid-rows-10 bg-gradient-to-br from-primary to-accent border-none ${
-          className || ""
-        }`}
+    <aside 
+      className={`h-full border-r border bg-card flex flex-col px-4 py-2 gap-4
+       ${collapsed ? "w-20" : "w-64"} 
+       bg-gradient-to-br
+       from-[hsl(var(--primary)/0.15)]
+       to-[hsl(var(--accent)/0.05)]
+       `}
       >
-        <CardHeader
-          className={`row-span-2 grid ${
-            collapsed
-              ? "justify-center"
-              : "grid-cols-10 gap-3 items-baseline justify-center text-center"
-          }`}
+      {/* Header */}
+      <div className={`flex p-2 ${!collapsed ? "flex-row justify-between gap-8" : "flex-col items-center"}`}>
+        <Link href="/panel">
+          <span className="text-2xl font-bold text-primary">
+            {!collapsed ? "X-Ops Tools" : "X"}
+          </span>
+        </Link>
+        <Button
+          variant="ghost"
+          className="rounded-full h-8 w-8 text-muted-foreground hover:text-primary"
+          onClick={() => onCollapsedChange(!collapsed)}
         >
-          {!collapsed ? (
-            <CardTitle className="text-xl col-span-8 text-secondary-foreground">
-              <Link href="/panel">X-Ops Tools</Link>
-            </CardTitle>
-          ) : (
-            <CardTitle className="text-xl text-center justify-center text-secondary-foreground">
-              <Link href="/panel">X</Link>
-            </CardTitle>
-          )}
-          <Button
-            variant="ghost"
-            className="rounded-full h-8 w-8 mx-auto text-secondary-foreground hover:text-secondary-foreground/80 hover:bg-secondary/10"
-            onClick={() => onCollapsedChange(!collapsed)}
-          >
-            <ArrowLeft
-              className={`transition-transform ${
-                collapsed ? "rotate-180" : "rotate-0"
-              }`}
-            />
-          </Button>
-        </CardHeader>
-        <CardContent className="row-span-6">
-          <CardDescription>
-            <SidebarElements isCollapsed={collapsed} />
-          </CardDescription>
-        </CardContent>
-        <CardFooter className="row-span-4">
-          <Logout isCollapsed={collapsed} />
-        </CardFooter>
-      </Card>
-    </div>
+          <ArrowLeft
+            className={`transition-transform ${
+              collapsed ? "rotate-180" : "rotate-0"
+            }`}
+          />
+        </Button>
+      </div>
+      <hr className="border-t border-primary/40" />
+      {/* Navigation */}
+      <nav className="flex-grow">
+        <SidebarElements isCollapsed={collapsed} />
+      </nav>
+
+      {/* Footer */}
+      <Logout isCollapsed={collapsed} />
+    </aside>
   );
 }

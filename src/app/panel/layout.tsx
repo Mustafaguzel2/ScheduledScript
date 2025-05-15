@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import PanelLayoutWrapper from "@/components/panel-layout-wrapper";
+import { Suspense } from "react";
+import LoadingAnimation from "@/components/loadingAnimation";
 
 export const metadata: Metadata = {
   title: {
@@ -17,5 +19,12 @@ export default function PanelLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <PanelLayoutWrapper>{children}</PanelLayoutWrapper>;
+
+  return (
+    <PanelLayoutWrapper>
+      <Suspense fallback={<LoadingAnimation />}>
+        {children}
+      </Suspense>
+    </PanelLayoutWrapper>
+  );
 }

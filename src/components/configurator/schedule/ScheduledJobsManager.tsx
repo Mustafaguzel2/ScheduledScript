@@ -18,7 +18,7 @@ export type ScheduledJobResponse = {
 };
 
 const fetchJobs = async (): Promise<ScheduledJobResponse[]> => {
-  const response = await fetch("/api/start-scheduled-job");
+  const response = await fetch("/api/jobs/start-scheduled-job");
   const data = await response.json();
   return data.jobs || [];
 };
@@ -29,7 +29,7 @@ const scheduleJob = async (jobData: {
   scriptName: string;
 }): Promise<ScheduledJobResponse> => {
   try {
-    const response = await fetch("/api/start-scheduled-job", {
+    const response = await fetch("/api/jobs/start-scheduled-job", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const scheduleJob = async (jobData: {
 // Function to delete a job
 const deleteJob = async (id: string): Promise<void> => {
   try {
-    const response = await fetch(`/api/start-scheduled-job?id=${id}`, {
+    const response = await fetch(`/api/jobs/start-scheduled-job?id=${id}`, {
       method: "DELETE",
     });
 

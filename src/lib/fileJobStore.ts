@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { Job, scheduleJob } from 'node-schedule';
+import { getLogFilePath } from './logger';
 
 export interface ScheduledJobData {
   id: string;
@@ -78,14 +79,22 @@ export function storeJobToFile(jobData: ScheduledJobData): void {
 
 // Get a job by ID
 export function getJobFromFile(id: string): ScheduledJobData | undefined {
-  const jobs = readJobsFromFile();
-  return jobs.find(job => job.id === id);
+  const job = readJobsFromFile().find(job => job.id === id);
+  if (!job) return undefined;
+  return {
+    ...job,
+    hasLogs: jobHasLogs(job.id),
+  };
 }
 
 // Get all jobs
 export function getAllJobsFromFile(): ScheduledJobData[] {
-  // Filter out canceled jobs when returning the list
-  return readJobsFromFile().filter(job => !job.canceled);
+  return readJobsFromFile()
+    .filter(job => !job.canceled)
+    .map(job => ({
+      ...job,
+      hasLogs: jobHasLogs(job.id),
+    }));
 }
 
 // Update job status
@@ -213,4 +222,10 @@ export function initializeStoredJobs(jobHandler: (id: string, scriptPath: string
       }
     }
   });
+}
+
+// Log dosyasının varlığını kontrol eden fonksiyon
+function jobHasLogs(jobId: string): boolean {
+  const logPath = getLogFilePath(jobId);
+  return fs.existsSync(logPath);
 } 

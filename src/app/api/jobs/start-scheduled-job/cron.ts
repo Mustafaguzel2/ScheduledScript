@@ -14,6 +14,7 @@ import {
 export async function startScheduledJob(cronExpression: string, scriptName: string): Promise<ScheduledJobData> {
   const jobId = uuidv4();
   const scriptPath = path.resolve(process.cwd(), `src/scripts/${scriptName}`);
+  const pythonPath = path.resolve(process.cwd(), "src/.venv/bin/python3");
   
   writeLog(jobId, 'info', `Job scheduled with cron expression: ${cronExpression} and script: ${scriptName}`);
   
@@ -32,7 +33,13 @@ export async function startScheduledJob(cronExpression: string, scriptName: stri
     updateJobStatusInFile(jobId, 'running');
     
     try {
-      const pythonProcess = spawn("python3", [scriptPath]);
+      const logFilePath = path.resolve(process.cwd(), `logs/job-${jobId}.log`);
+      const pythonProcess = spawn(pythonPath, [
+        scriptPath,
+        "--job-id", jobId,
+        "--log-file", logFilePath,
+        "--debug"
+      ]);
 
       pythonProcess.stdout.on("data", (data) => {
         const output = data.toString().trim();
@@ -92,6 +99,8 @@ export async function startScheduledJob(cronExpression: string, scriptName: stri
 
 // Function to handle job execution (used for initializing stored jobs)
 export function executeJob(jobId: string, scriptPath: string): void {
+  const pythonPath = path.resolve(process.cwd(), "src/.venv/bin/python3");
+  const logFilePath = path.resolve(process.cwd(), `logs/job-${jobId}.log`);
   // Always get fresh job data to check if job has been canceled
   const currentJobData = getJobFromFile(jobId);
   
@@ -106,7 +115,12 @@ export function executeJob(jobId: string, scriptPath: string): void {
   updateJobStatusInFile(jobId, 'running');
   
   try {
-    const pythonProcess = spawn("python3", [scriptPath]);
+    const pythonProcess = spawn(pythonPath, [
+      scriptPath,
+      "--job-id", jobId,
+      "--log-file", logFilePath,
+      "--debug"
+    ]);
 
     pythonProcess.stdout.on("data", (data) => {
       const output = data.toString().trim();

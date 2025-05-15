@@ -8,8 +8,8 @@ interface TableSearchBarProps {
 
 export function TableSearchBar({ value, onChange }: TableSearchBarProps) {
   return (
-    <div className="sticky top-0 backdrop-blur-sm py-4 border-b border-border z-10">
-      <div className="w-full px-6 ml-4">
+    <div className="sticky top-0 backdrop-blur-md p-2 py-4 border-b border-border z-10">
+      <div className="w-full">
         <div className="relative w-full">
           <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
             <Search className="h-4 w-4 text-muted-foreground" />

@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
 import WorkStarter from "@/components/configurator/WorkStarter";
+import LoadingAnimation from "@/components/loadingAnimation";
 
 export const metadata: Metadata = {
   title: "Configurator",
@@ -12,13 +13,16 @@ export const metadata: Metadata = {
 
 export default function Configurator() {
   return (
-    <div className="w-full max-w-5xl mx-auto">
-      <div className="mb-6">
-        <h1 className="text-3xl font-semibold tracking-tight mb-2">Configurator</h1>
-        <p className="text-muted-foreground">Manage parameters and scheduled jobs</p>
+    <div className="w-full h-full px-8 py-2 space-y-4">
+      <div className="flex flex-col p-2 gap-1">
+        <h1 className="font-semibold text-2xl text-foreground">
+          Configurator
+        </h1>
+        <p className="text-sm text-muted-foreground">
+          Manage parameters and scheduled jobs
+        </p>
       </div>
-      
-      <Suspense fallback={<div className="w-full h-[600px] bg-gray-200 rounded-lg animate-pulse"></div>}>
+      <Suspense fallback={<LoadingAnimation />}>
         <WorkStarter />
       </Suspense>
     </div>

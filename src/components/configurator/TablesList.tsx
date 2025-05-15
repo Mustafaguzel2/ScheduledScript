@@ -56,7 +56,7 @@ export function TablesList({ tables }: TablesListProps) {
   };
 
   return (
-    <Card className="w-full h-full min-w-[200px]">
+    <Card className="w-full h-full min-w-[150px]">
       <CardHeader className="space-y-4">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-medium">Tables</CardTitle>
@@ -94,6 +94,7 @@ export function TablesList({ tables }: TablesListProps) {
                   </TooltipTrigger>
                   <TooltipContent className="max-w-[300px] p-2 bg-popover text-popover-foreground border border-border shadow-lg">
                     <div className="space-y-1">
+                      <div className="font-bold text-lg">{table.name}</div>
                       <div className="font-medium mb-1">Columns:</div>
                       {columns.length > 0 ? (
                         <div className="space-y-1">

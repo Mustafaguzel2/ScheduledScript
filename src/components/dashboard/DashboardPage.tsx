@@ -111,10 +111,10 @@ export default function DashboardPage() {
       <div className="w-full h-full flex flex-col">
         <TableSearchBar value={tableSearch} onChange={setTableSearch} />
 
-        <div className="flex-1 w-full">
-          <div className="h-full w-full px-6 ml-4">
+        <div className="flex-1 w-full px-2 py-4">
+          <div className="h-full w-full">
             {filteredTables.length > 0 ? (
-              <div className="py-6 space-y-6">
+              <div className="space-y-6">
                 {filteredTables.map((tableInfo, index) => {
                   const tableKey = `${tableInfo.schema}.${tableInfo.table}`;
                   return (

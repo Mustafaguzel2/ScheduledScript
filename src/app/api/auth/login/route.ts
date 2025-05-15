@@ -1,28 +1,22 @@
 import { NextResponse } from "next/server";
 import ActiveDirectory from "activedirectory2";
-import { cookies } from "next/headers";
 import crypto from "crypto";
 import { User } from "@/types/user";
 
 // LDAP Configuration
 const config = {
-  url: process.env.LDAP_URL || "",
+  url: process.env.NEXT_PUBLIC_LDAP_URL || "",
   baseDN: process.env.LDAP_BASE_DN || "",
 };
+
+const groupName = process.env.GROUP_NAME || "";
+const groupName2 = process.env.GROUP_NAME2 || "";
 
 if (!config.url || !config.baseDN) {
   throw new Error(
     "Invalid LDAP configuration. Check your environment variables."
   );
 }
-
-// Common cookie settings
-const commonCookieSettings = {
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "lax" as const,
-  maxAge: 60 * 60 * 24 * 30, // 30 days
-  path: "/",
-};
 
 // Helper to parse AD error codes
 function parseADError(error: Error | unknown): {
@@ -185,37 +179,6 @@ async function checkGroupMembership(
   });
 }
 
-// Helper function to set cookies
-async function setCookies(
-  username: string,
-  password: string,
-  isMember: boolean
-) {
-  const cookieStore = await cookies();
-  const session = {
-    id: crypto.randomUUID(),
-    username,
-    password,
-    isMember,
-    createdAt: new Date().toISOString(),
-  };
-
-  cookieStore.set("session", JSON.stringify(session), {
-    ...commonCookieSettings,
-    httpOnly: true,
-  });
-
-  cookieStore.set("username", username, {
-    ...commonCookieSettings,
-    httpOnly: false,
-  });
-
-  cookieStore.set("isMember", isMember.toString(), {
-    ...commonCookieSettings,
-    httpOnly: false,
-  });
-}
-
 export async function POST(request: Request) {
   try {
     // Get user credentials from request
@@ -266,7 +229,10 @@ export async function POST(request: Request) {
     }
 
     // Check userAccountControl for the disabled flag (0x0002)
-    if (user.userAccountControl && parseInt(user.userAccountControl) & 0x0002) {
+    if (
+      user.userAccountControl &&
+      (parseInt(user.userAccountControl, 10) & 0x0002)
+    ) {
       console.log(`Account for ${username} is disabled.`);
       return NextResponse.json(
         {
@@ -277,23 +243,55 @@ export async function POST(request: Request) {
       );
     }
 
-    // Step 3: Check if user is an administrator
-    const groupName = "Administrators";
-    const isMember = await checkGroupMembership(ad, username, groupName);
+    // Step 3: Check if user is an administrator and member of Pusula_Discovery (parallel)
+    const [isMember, isMember2] = await Promise.all([
+      checkGroupMembership(ad, username, groupName),
+      checkGroupMembership(ad, username, groupName2),
+    ]);
     console.log(`${username} is a member of ${groupName}: ${isMember}`);
+    console.log(`${username} is a member of ${groupName2}: ${isMember2}`);
 
-    if (!isMember) {
-      console.log(`User ${username} is not an administrator.`);
-      // We still log them in, but with non-admin privileges
+    if (!isMember2) {
+      console.log(`User ${username} is not a member of ${groupName2}.`);
+      return NextResponse.json(
+        {
+          message: `You must be a member of the ${groupName2} group to log in.`,
+        },
+        { status: 403 }
+      );
     }
 
-    // Step 4: Set cookies and session
-    await setCookies(username, password, isMember);
+    // Step 4: Set cookies and session (without password)
+    const session = {
+      id: crypto.randomUUID(),
+      username,
+      isMember,
+      isMember2,
+      createdAt: new Date().toISOString(),
+    };
 
-    return NextResponse.json(
+    const response = NextResponse.json(
       { message: "Authentication successful.", isMember },
       { status: 200 }
     );
+
+    response.cookies.set("session", JSON.stringify(session), {
+      httpOnly: true,
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 30,
+      path: "/",
+      secure: false,
+    });
+
+    response.cookies.set("isMember", isMember.toString(), {
+      httpOnly: false,
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 30,
+      path: "/",
+      secure: false,
+    });
+
+    return response;
   } catch (error) {
     console.error("Error during authentication:", error);
     return NextResponse.json(

@@ -1,0 +1,108 @@
+2025-05-12 16:36:51,922 INFO Script started
+2025-05-12 16:36:51,922 INFO Received nodes: [{'nodeKind': 'VirtualMachine', 'columns': [{'name': 'id'}, {'name': 'name'}, {'name': 'uuid'}, {'name': 'key'}]}]
+2025-05-12 16:36:51,922 INFO Script finished successfully
+2025-05-12 16:37:20,617 INFO Script started
+2025-05-12 16:37:20,617 INFO Received nodes: [{'nodeKind': 'VirtualMachine', 'columns': [{'name': 'id'}, {'name': 'name'}, {'name': 'uuid'}, {'name': 'key'}]}]
+2025-05-12 16:37:20,617 INFO Script finished successfully
+2025-05-12 16:38:15,182 INFO Script started
+2025-05-12 16:38:15,183 INFO Received nodes: [{'nodeKind': 'VirtualMachine', 'columns': [{'name': 'id'}, {'name': 'name'}, {'name': 'key'}, {'name': 'uuid'}]}]
+2025-05-12 16:38:15,183 INFO Script finished successfully
+2025-05-12 16:39:58,568 INFO Script started
+2025-05-12 16:39:58,569 INFO Received nodes: [{'nodeKind': 'VirtualMachine', 'columns': [{'name': 'id'}, {'name': 'uuid'}, {'name': 'name'}, {'name': 'key'}]}]
+2025-05-12 16:39:58,569 INFO Script finished successfully
+2025-05-12 16:42:15,782 INFO Script started
+2025-05-12 16:42:15,782 INFO Script started
+2025-05-12 16:42:15,782 INFO Received nodes: [{'nodeKind': 'VirtualMachine', 'columns': [{'name': 'id'}, {'name': 'uuid'}, {'name': 'name'}, {'name': 'key'}]}]
+2025-05-12 16:42:15,782 INFO Starting data extraction and insertion process.
+2025-05-12 16:42:16,254 INFO Starting VirtualMachine table processing with columns: ['id', 'uuid', 'name', 'key']
+2025-05-12 16:42:16,254 INFO Processing node type: VirtualMachine
+2025-05-12 16:42:16,254 INFO Using columns for VirtualMachine: ['id', 'uuid', 'name', 'key']
+2025-05-12 16:43:00,003 INFO VirtualMachine table created with specified columns: ['id', 'uuid', 'name', 'key']
+2025-05-12 16:43:00,148 INFO All data processing completed successfully.
+2025-05-12 16:45:58,116 INFO Script started
+2025-05-12 16:45:58,116 INFO Script started
+2025-05-12 16:45:58,116 INFO Received nodes: [{'nodeKind': 'VirtualMachine', 'columns': [{'name': 'name'}, {'name': 'id'}, {'name': 'uuid'}, {'name': 'key'}]}]
+2025-05-12 16:45:58,116 INFO Starting data extraction and insertion process.
+2025-05-12 16:45:58,614 INFO Starting VirtualMachine table processing with columns: ['name', 'id', 'uuid', 'key']
+2025-05-12 16:45:58,615 INFO Processing node type: VirtualMachine
+2025-05-12 16:45:58,615 INFO Using columns for VirtualMachine: ['name', 'id', 'uuid', 'key']
+2025-05-12 16:46:43,030 INFO VirtualMachine table created with specified columns: ['name', 'id', 'uuid', 'key']
+2025-05-12 16:46:43,141 INFO All data processing completed successfully.
+2025-05-12 16:56:52,882 INFO Script started
+2025-05-12 16:56:52,883 INFO Script started
+2025-05-12 16:56:52,883 INFO Received nodes: [{'nodeKind': 'VirtualMachine', 'columns': [{'name': 'id'}, {'name': 'uuid'}, {'name': 'key'}, {'name': 'name'}]}, {'nodeKind': 'SoftwareInstance', 'columns': [{'name': 'id'}, {'name': 'key'}, {'name': 'name'}, {'name': 'publisher'}]}]
+2025-05-12 16:56:52,883 INFO Starting data extraction and insertion process.
+2025-05-12 16:56:53,342 INFO Starting VirtualMachine table processing with columns: ['id', 'uuid', 'key', 'name']
+2025-05-12 16:56:53,342 INFO Processing node type: VirtualMachine
+2025-05-12 16:56:53,342 INFO Using columns for VirtualMachine: ['id', 'uuid', 'key', 'name']
+2025-05-12 16:57:37,909 INFO VirtualMachine table created with specified columns: ['id', 'uuid', 'key', 'name']
+2025-05-12 16:57:37,958 INFO Starting SoftwareInstance table processing with columns: ['id', 'key', 'name', 'publisher']
+2025-05-12 16:57:37,958 INFO Processing node type: SoftwareInstance
+2025-05-12 16:57:37,958 INFO Using columns for SoftwareInstance: ['id', 'key', 'name', 'publisher']
+2025-05-12 16:58:31,098 INFO SoftwareInstance table created with specified columns: ['id', 'key', 'name', 'publisher']
+2025-05-12 16:58:31,201 INFO All data processing completed successfully.
+2025-05-12 17:04:41,404 INFO Script started
+2025-05-12 17:04:41,404 INFO Script started
+2025-05-12 17:04:41,404 INFO Received nodes: [{'nodeKind': 'SoftwareInstance', 'columns': [{'name': 'id'}, {'name': 'key'}, {'name': 'name'}, {'name': 'publisher'}]}, {'nodeKind': 'VirtualMachine', 'columns': [{'name': 'id'}, {'name': 'name'}, {'name': 'uuid'}, {'name': 'key'}]}]
+2025-05-12 17:04:41,405 INFO Starting data extraction and insertion process.
+2025-05-12 17:04:41,923 INFO Starting SoftwareInstance table processing with columns: ['id', 'key', 'name', 'publisher']
+2025-05-12 17:04:41,923 INFO Processing node type: SoftwareInstance
+2025-05-12 17:04:41,923 INFO Using columns for SoftwareInstance: ['id', 'key', 'name', 'publisher']
+2025-05-12 17:05:31,705 INFO SoftwareInstance table created with specified columns: ['id', 'key', 'name', 'publisher']
+2025-05-12 17:06:07,408 INFO Starting VirtualMachine table processing with columns: ['id', 'name', 'uuid', 'key']
+2025-05-12 17:06:07,409 INFO Processing node type: VirtualMachine
+2025-05-12 17:06:07,409 INFO Using columns for VirtualMachine: ['id', 'name', 'uuid', 'key']
+2025-05-12 17:06:50,993 INFO VirtualMachine table created with specified columns: ['id', 'name', 'uuid', 'key']
+2025-05-12 17:18:20,347 INFO All data processing completed successfully.
+2025-05-12 17:24:27,916 INFO Script started
+2025-05-12 17:24:27,916 INFO Script started
+2025-05-12 17:24:27,916 INFO Received nodes: [{'nodeKind': 'VirtualMachine', 'columns': [{'name': 'id'}, {'name': 'key'}, {'name': 'uuid'}, {'name': 'name'}]}, {'nodeKind': 'SoftwareInstance', 'columns': [{'name': 'id'}, {'name': 'key'}, {'name': 'name'}, {'name': 'publisher'}]}]
+2025-05-12 17:24:27,917 INFO Starting data extraction and insertion process.
+2025-05-12 17:24:28,621 INFO Starting VirtualMachine table processing with columns: ['id', 'key', 'uuid', 'name']
+2025-05-12 17:24:28,621 INFO Processing node type: VirtualMachine
+2025-05-12 17:24:28,621 INFO Using columns for VirtualMachine: ['id', 'key', 'uuid', 'name']
+2025-05-12 17:25:13,076 INFO VirtualMachine table created with specified columns: ['id', 'key', 'uuid', 'name']
+2025-05-12 17:33:31,523 INFO Starting SoftwareInstance table processing with columns: ['id', 'key', 'name', 'publisher']
+2025-05-12 17:33:31,526 INFO Processing node type: SoftwareInstance
+2025-05-12 17:33:31,526 INFO Using columns for SoftwareInstance: ['id', 'key', 'name', 'publisher']
+2025-05-12 17:34:20,239 INFO SoftwareInstance table created with specified columns: ['id', 'key', 'name', 'publisher']
+2025-05-12 17:34:57,449 INFO All data processing completed successfully.
+2025-05-13 10:13:41,559 INFO Script started
+2025-05-13 10:13:41,560 INFO Script started
+2025-05-13 10:13:41,560 INFO Received nodes: [{'nodeKind': 'VirtualMachine', 'columns': [{'name': 'id'}, {'name': 'key'}, {'name': 'name'}, {'name': 'uuid'}]}, {'nodeKind': 'SoftwareInstance', 'columns': [{'name': 'id'}, {'name': 'key'}, {'name': 'name'}]}]
+2025-05-13 10:13:41,561 INFO Starting data extraction and insertion process.
+2025-05-13 10:13:43,122 INFO Starting VirtualMachine table processing with columns: ['id', 'key', 'name', 'uuid']
+2025-05-13 10:13:43,122 INFO Processing node type: VirtualMachine
+2025-05-13 10:13:43,122 INFO Using columns for VirtualMachine: ['id', 'key', 'name', 'uuid']
+2025-05-13 10:14:26,305 INFO VirtualMachine table created with specified columns: ['id', 'key', 'name', 'uuid']
+2025-05-13 10:25:55,218 INFO Starting SoftwareInstance table processing with columns: ['id', 'key', 'name']
+2025-05-13 10:25:55,219 INFO Processing node type: SoftwareInstance
+2025-05-13 10:25:55,219 INFO Using columns for SoftwareInstance: ['id', 'key', 'name']
+2025-05-13 10:26:42,427 INFO SoftwareInstance table created with specified columns: ['id', 'key', 'name']
+2025-05-13 10:27:14,971 INFO All data processing completed successfully.
+2025-05-13 12:16:02,499 INFO Script started
+2025-05-13 12:16:02,499 INFO Script started
+2025-05-13 12:16:02,499 INFO Received nodes: [{'nodeKind': 'VirtualMachine', 'columns': [{'name': 'id'}, {'name': 'key'}, {'name': 'name'}, {'name': 'uuid'}]}, {'nodeKind': 'SoftwareInstance', 'columns': [{'name': 'id'}, {'name': 'key'}, {'name': 'name'}, {'name': 'publisher'}]}]
+2025-05-13 12:16:02,499 INFO Starting data extraction and insertion process.
+2025-05-13 12:16:02,944 INFO Starting VirtualMachine table processing with columns: ['id', 'key', 'name', 'uuid']
+2025-05-13 12:16:02,944 INFO Processing node type: VirtualMachine
+2025-05-13 12:16:02,944 INFO Using columns for VirtualMachine: ['id', 'key', 'name', 'uuid']
+2025-05-13 12:16:46,169 INFO VirtualMachine table created with specified columns: ['id', 'key', 'name', 'uuid']
+2025-05-13 12:28:15,601 INFO Starting SoftwareInstance table processing with columns: ['id', 'key', 'name', 'publisher']
+2025-05-13 12:28:15,603 INFO Processing node type: SoftwareInstance
+2025-05-13 12:28:15,603 INFO Using columns for SoftwareInstance: ['id', 'key', 'name', 'publisher']
+2025-05-13 12:29:11,698 INFO SoftwareInstance table created with specified columns: ['id', 'key', 'name', 'publisher']
+2025-05-13 12:29:45,923 INFO All data processing completed successfully.
+2025-05-13 17:19:07,755 INFO Script started
+2025-05-13 17:19:07,755 INFO Script started
+2025-05-13 17:19:07,755 INFO Received nodes: [{'nodeKind': 'VirtualMachine', 'columns': [{'name': 'id'}, {'name': 'name'}, {'name': 'uuid'}, {'name': 'key'}]}, {'nodeKind': 'SoftwareInstance', 'columns': [{'name': 'id'}, {'name': 'key'}, {'name': 'name'}, {'name': 'publisher'}]}]
+2025-05-13 17:19:07,755 INFO Starting data extraction and insertion process.
+2025-05-13 17:19:08,433 INFO Starting VirtualMachine table processing with columns: ['id', 'name', 'uuid', 'key']
+2025-05-13 17:19:08,433 INFO Processing node type: VirtualMachine
+2025-05-13 17:19:08,433 INFO Using columns for VirtualMachine: ['id', 'name', 'uuid', 'key']
+2025-05-13 17:19:53,213 INFO VirtualMachine table created with specified columns: ['id', 'name', 'uuid', 'key']
+2025-05-13 17:22:02,054 INFO Starting SoftwareInstance table processing with columns: ['id', 'key', 'name', 'publisher']
+2025-05-13 17:22:02,055 INFO Processing node type: SoftwareInstance
+2025-05-13 17:22:02,055 INFO Using columns for SoftwareInstance: ['id', 'key', 'name', 'publisher']
+2025-05-13 17:22:59,485 INFO SoftwareInstance table created with specified columns: ['id', 'key', 'name', 'publisher']
+2025-05-13 17:23:32,220 INFO All data processing completed successfully.

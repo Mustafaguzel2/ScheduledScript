@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { Client, Change, Attribute } from "ldapts";
 import { cookies } from "next/headers";
 
-const url = process.env.LDAP_URL || "";
+const url = process.env.NEXT_PUBLIC_LDAP_URL || "";
 const baseDN = process.env.LDAP_BASE_DN || "";
 
 if (!url || !baseDN) {
